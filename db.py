@@ -19,8 +19,8 @@ def get_hash(password, salt):
     hashed_password = hashlib.pbkdf2_hmac('sha256', b_pw, b_salt, 1246).hex()
     return hashed_password
 
-def insert_user(user_name,password):
-    sql = 'INSERT INTO user_sample VALUES(default, %s, %s, %s)'
+def insert_user(email,name,salt,password):
+    sql = 'INSERT INTO task_account VALUES(default, %s, %s, %s, %s,0)'
     
     salt = get_salt()
     hashed_password = get_hash(password, salt)
@@ -29,7 +29,7 @@ def insert_user(user_name,password):
         connection = get_connection()
         cursor = connection.cursor()
         
-        cursor.execute(sql, (user_name, hashed_password, salt))
+        cursor.execute(sql, (email,name, salt,hashed_password))
         count = cursor.rowcount #更新件数取得
         connection.commit()
     
@@ -42,14 +42,14 @@ def insert_user(user_name,password):
     
     return count
 
-def login(user_name, password):
-    sql = 'SELECT hashed_password, salt FROM user_sample WHERE name = %s'
+def login(mail, password):
+    sql = 'SELECT pass, salt FROM task_account WHERE mail = %s'
     flg = False
     
     try :
         connection = get_connection()
         cursor =  connection.cursor()
-        cursor.execute(sql, (user_name, ))
+        cursor.execute(sql, (mail, ))
         user = cursor.fetchone()
         
         if user != None:
