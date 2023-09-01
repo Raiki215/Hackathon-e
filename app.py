@@ -8,6 +8,7 @@ app = Flask(__name__)
 @app.route('/home', methods=['GET'])
 def home():
     return render_template('home.html')
+
 @app.route('/', methods=['GET'])
 def index():
     msg = request.args.get('msg')
@@ -15,6 +16,7 @@ def index():
         return render_template('index.html')
     else :
         return render_template('index.html', msg=msg)
+    
 @app.route('/',methods=['POST'])
 def login():
     user_name  =request.form.get('username')
@@ -29,21 +31,25 @@ def login():
             'password': password
         }
         return render_template('index.html',error=error, data=input_data)
+    
 @app.route('/logout')
 def logout():
     session.pop('user', None)
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=1)
     return redirect(url_for('index'))
+
 @app.route('/mypage', methods=['GET'])
 def mypage():
     if 'user' in session:
         return render_template('mypage.html')
     else :
         return redirect(url_for('index'))
+    
 @app.route('/register')
 def register_form():
     return render_template('register.html')
+
 @app.route('/register_exe', methods=['POST'])
 def register_exe():
     user_name = request.form.get('username')
