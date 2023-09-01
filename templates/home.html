@@ -1,0 +1,20 @@
+{% extends "main_layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='/css/home.css')}}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <div class="wrapper">
+        <h1 id="c_header"></h1>
+    
+        <div id="next-prev-button">
+            <button id="prev" onclick="prev()">‹</button>
+            <button id="next" onclick="next()">›</button>
+        </div>
+    
+        <div id="calendar"></div>
+    </div>
+</div>
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+{% endblock %}
