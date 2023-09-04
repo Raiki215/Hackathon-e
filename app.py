@@ -1,11 +1,10 @@
 from flask import Flask,render_template,request,redirect,url_for,session
-import psycopg2,string,random,datetime,db
 from datetime import timedelta
+from user.user import *
 
 app = Flask(__name__)
 # app.secret_key
-
-
+app.register_blueprint(user_bp)
 
 @app.route('/notification',methods=['GET'])
 def notification():

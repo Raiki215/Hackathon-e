@@ -1,4 +1,8 @@
-import psycopg2,db
+import psycopg2
+import sys
+sys.path.append('..')
+import db
+
 def insert_user(email,name,salt,password):
     sql = 'INSERT INTO task_account VALUES(default, %s, %s, %s, %s,0)'
     
@@ -57,7 +61,7 @@ def after_login(mail):
         cursor =  connection.cursor()
         cursor.execute(sql, (mail, ))
         user = cursor.fetchone()
-    except :
+    except psycopg2.DatabaseError:
         user = None
         
     finally :

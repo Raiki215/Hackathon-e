@@ -1,22 +1,21 @@
 from flask import Flask,render_template,request,redirect,url_for,session,Blueprint
-import psycopg2,string,random,datetime,db
+import user_method
 from datetime import timedelta
 user_bp = Blueprint('user', __name__, '/user')
-
-@user_bp.route()
 
 
 @user_bp.route('/',methods=['POST'])
 def login():
-    user_name  =request.form.get('username')
+    mail  =request.form.get('mail')
     password  =request.form.get('password')
-    if db.login(user_name, password):
+    if user_method.login(mail, password):
+        user=user_method.after_login(mail)
         session['user'] = True # session にキー：'user', バリュー:True を追加
-        return redirect(url_for('mypage'))
+        return redirect(url_for('home'))
     else :
         error = 'ログインに失敗しました'
         input_data = {
-            'user_name': user_name,
+            'mail': mail,
             'password': password
         }
         return render_template('index.html',error=error, data=input_data)
@@ -38,15 +37,23 @@ def register_form():
 
 @user_bp.route('/register_exe', methods=['POST'])
 def register_exe():
-    user_name = request.form.get('username')
+    name = request.form.get('name')
+    mail = request.form.get('mail')
     password = request.form.get('password')
-    if user_name == '':
+    password2 = request.form.get('password2')
+    if name == '':
         error = 'ユーザー名が未入力です'
-        return render_template('register.html', error=error,user_name=user_name,password=password)
+        return render_template('register.html', error=error,name=name,password=password,password2=password2)
+    if mail == '':
+        error = 'メールアドレスが未入力です'
+        return render_template('register.html', error=error,name=name,password=password,password2=password2)
     if password == '':
         error = 'パスワードが未入力です'
-        return render_template('register.html', error=error,user_name=user_name,password=password)
-    count = db.insert_user(user_name, password)
+        return render_template('register.html', error=error,name=name,password=password,password2=password2)
+    if password2 == '':
+        error = 'メールアドレス(確認用)が未入力です'
+        return render_template('register.html', error=error,name=name,password=password,password2=password2)
+    count = user_method.insert_user(name, password)
     if count == 1:
         msg = '登録が完了しました'
         return redirect(url_for('index', msg=msg))
@@ -54,5 +61,3 @@ def register_exe():
         error = '登録に失敗しました'
         return render_template('register.html', error=error)
     
-if __name__ == '__main__':
-    user_bp.run(debug=True)
