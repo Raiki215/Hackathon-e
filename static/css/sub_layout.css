@@ -1,0 +1,21 @@
+.triangle_upper_left{
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #636060;
+    height: 30%;
+    width: 50%;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.triangle_lower_right{
+    z-index: -1;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    height: 50%;
+    width: 30%;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
