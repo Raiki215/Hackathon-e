@@ -1,6 +1,7 @@
 import psycopg2
 import sys
-sys.path.append('..')
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import db
 
 def insert_user(email,name,salt,password):

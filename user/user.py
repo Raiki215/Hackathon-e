@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,redirect,url_for,session,Blueprint
-import user.user_method as user_method
+from user import user_method
 from datetime import timedelta
 
 
