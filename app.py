@@ -1,6 +1,8 @@
 from flask import Flask,render_template,request,redirect,url_for,session
 from datetime import timedelta
-from user.user import *
+from user.user import user_bp
+
+
 
 app = Flask(__name__)
 # app.secret_key

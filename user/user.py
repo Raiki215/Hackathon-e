@@ -1,6 +1,8 @@
 from flask import Flask,render_template,request,redirect,url_for,session,Blueprint
-import user_method
+import user.user_method as user_method
 from datetime import timedelta
+
+
 user_bp = Blueprint('user', __name__, '/user')
 
 

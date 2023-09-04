@@ -1,4 +1,5 @@
 import os, psycopg2, string, random, hashlib
+import db
 
 def get_connection():
     url = os.environ['DATABASE_URL']
