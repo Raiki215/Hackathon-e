@@ -1,0 +1,19 @@
+{% extends "sub_layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='/css/notification.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="main">
+    <a href="{{url_for('home')}}" class="back_button">◀ 戻る</a>
+    <div class="content">
+        <h1>通知</h1>
+        <div class="item">「タスク分類名」の「タスク」の締め切りが残り７日です。</div>
+        <div class="item">xxxxxxxx@xxxxが「タスク分類名」の「タスク」を更新しました。</div>
+        <div class="item">xxxxxxxx@xxxxが「タスク分類名」の「タスク」を更新しました。</div>
+        <div class="item">「タスク分類名」の「タスク」の締め切りが残り７日です。</div>
+        <div class="item">「タスク分類名」の「タスク」の締め切りが残り７日です。</div>
+        <div class="item">「タスク分類名」の「タスク」の締め切りが残り７日です。</div>
+    </div>
+</div>
+{% endblock %}

@@ -9,6 +9,10 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
+@app.route('/notification',methods=['GET'])
+def notification():
+    return render_template('notification.html')
+
 @app.route('/', methods=['GET'])
 def index():
     msg = request.args.get('msg')

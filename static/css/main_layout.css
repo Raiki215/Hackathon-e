@@ -1,3 +1,19 @@
+.notification_button{
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    text-decoration: none;
+    color: #636060;
+}
+
+.notification_button:hover{
+    color: #000;
+}
+
+.material-icons.miCSS { 
+	font-size: 48px;
+}
+
 aside{
     position: fixed;
     top: 0;
