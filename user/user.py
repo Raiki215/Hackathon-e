@@ -5,22 +5,23 @@ from datetime import timedelta
 
 user_bp = Blueprint('user', __name__, '/user')
 
-
 @user_bp.route('/',methods=['POST'])
 def login():
+    
     mail  =request.form.get('mail')
     password  =request.form.get('password')
     if user_method.login(mail, password):
         user=user_method.after_login(mail)
-        session['user'] = True # session にキー：'user', バリュー:True を追加
-        return redirect(url_for('home'))
-    else :
-        error = 'ログインに失敗しました'
-        input_data = {
+        if user != None:
+            session['user'] = [user[0], user[1], mail] # session にキー：'user', 0にid 1に名前
+            return redirect('/home')
+        else :
+            error = 'ログインに失敗しました'
+            input_data = {
             'mail': mail,
             'password': password
-        }
-        return render_template('index.html',error=error, data=input_data)
+            }
+            return render_template('index.html',error=error, data=input_data)
     
 @user_bp.route('/logout')
 def logout():
@@ -31,7 +32,12 @@ def logout():
 
 @user_bp.route('/home', methods=['GET'])
 def home():
-    return render_template('home.html')
+    if 'user' in session:
+        
+        return render_template('home.html')
+    else :
+        
+        return redirect(url_for('index'))
 
 @user_bp.route('/register')
 def register_form():
@@ -39,7 +45,7 @@ def register_form():
 
 @user_bp.route('/register_exe', methods=['POST'])
 def register_exe():
-    name = request.form.get('name')
+    name = request.form.get('username')
     mail = request.form.get('mail')
     password = request.form.get('password')
     password2 = request.form.get('password2')
@@ -55,7 +61,8 @@ def register_exe():
     if password2 == '':
         error = 'メールアドレス(確認用)が未入力です'
         return render_template('register.html', error=error,name=name,password=password,password2=password2)
-    count = user_method.insert_user(name, password)
+    if password==password2:
+        count = user_method.insert_user(mail,name,password)
     if count == 1:
         msg = '登録が完了しました'
         return redirect(url_for('index', msg=msg))
