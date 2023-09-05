@@ -1,6 +1,10 @@
-import psycopg2,db
-def insert_user(email,name,salt,password):
-    sql = 'INSERT INTO task_account VALUES(default, %s, %s, %s, %s,0)'
+import psycopg2
+import sys
+sys.path.append('..')
+import db
+
+def insert_user(email,name,password):
+    sql = 'INSERT INTO task_account VALUES(default, %s, %s, %s, %s, false)'
     
     salt = db.get_salt()
     hashed_password = db.get_hash(password, salt)
@@ -9,7 +13,7 @@ def insert_user(email,name,salt,password):
         connection = db.get_connection()
         cursor = connection.cursor()
         
-        cursor.execute(sql, (email,name, salt,hashed_password))
+        cursor.execute(sql,(email,name,salt,hashed_password))
         count = cursor.rowcount #更新件数取得
         connection.commit()
     
@@ -23,13 +27,15 @@ def insert_user(email,name,salt,password):
     return count
 
 def login(mail, password):
-    sql = 'SELECT pass, salt FROM task_account WHERE mail = %s'
+    sql = 'SELECT pass, salt FROM task_account WHERE email = %s'
+    
     flg = False
     
     try :
         connection = db.get_connection()
         cursor =  connection.cursor()
         cursor.execute(sql, (mail, ))
+        
         user = cursor.fetchone()
         
         if user != None:
@@ -50,14 +56,14 @@ def login(mail, password):
     return flg
 
 def after_login(mail):
-    sql='SELECT id,name FROM task_account WHERE mail=%s'
+    sql='SELECT id,name FROM task_account WHERE email=%s'
     
     try :
         connection = db.get_connection()
         cursor =  connection.cursor()
         cursor.execute(sql, (mail, ))
         user = cursor.fetchone()
-    except :
+    except psycopg2.DatabaseError:
         user = None
         
     finally :
