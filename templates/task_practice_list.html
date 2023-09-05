@@ -1,0 +1,25 @@
+{% extends "main_layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='/css/task_practice.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="main">
+    <h1 class="task_list_title">タスク管理練習一覧</h1>  
+    <div>
+        <label for="botton1" class="task_title">タイトル<a href="{{url_for('task_practice_data')}}" class="start_botton">始める</a></label>
+        <input type="checkbox" id="botton1">
+        <div class="task_goal task_goal1">◆ゴール<br>テキストテキストテキストテキストテキストテキスト</div>
+    </div>
+
+    <label for="botton2" class="task_title">タイトル</label>
+    <input type="checkbox" id="botton2">
+    <div class="task_goal task_goal2">◆ゴール<br>テキストテキストテキストテキストテキストテキスト</div>
+
+    <label for="botton3" class="task_title">タイトル</label>
+    <input type="checkbox" id="botton3">
+    <div class="task_goal task_goal3">◆ゴール<br>テキストテキストテキストテキストテキストテキスト</div>
+
+</div>
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+{% endblock %}
