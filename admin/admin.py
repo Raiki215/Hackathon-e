@@ -1,6 +1,6 @@
 from flask import Blueprint, Flask, render_template, redirect, session, url_for, request
 import admin.admin_method as admin_method
-admin_bp = Blueprint('admin', __name__, '/admin')
+admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 @admin_bp.route('/')
 def admin():
