@@ -27,7 +27,6 @@ def login():
 def logout():
     session.pop('user', None)
     session.permanent = True
-    user_bp.permanent_session_lifetime = timedelta(minutes=1)
     return redirect(url_for('index'))
 
 @user_bp.route('/home', methods=['GET'])
