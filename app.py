@@ -15,6 +15,10 @@ app.register_blueprint(admin_bp)
 app.register_blueprint(task_bp)
 app.permanent_session_lifetime = timedelta(minutes=5)
 
+@app.route('/')
+def index():
+    return redirect(url_for('user.index'))
+
 @app.route('/notification',methods=['GET'])
 def notification():
     return render_template('notification.html')
