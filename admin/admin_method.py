@@ -3,16 +3,15 @@ import sys
 sys.path.append('..')
 import db
 def admin_login(id, password):
-    sql = "SELECT pass, salt FROM task_account WHERE email = admin@morijyobi.ac.jp"
+    sql = "SELECT pass, salt FROM task_account WHERE email = 'admin@morijyobi.ac.jp' "
     flg = False
     
     try :
-        if id == admin:
+        if id == 'admin':
             connection = db.get_connection()
             cursor = connection.cursor()
-            cursor.execute(sql)
-            admin = cursor.fetchone()
-            
+            cursor.execute(sql) # ここでエラーが起きる
+            admin = cursor.fetchone()                
             salt = admin[1]
             hashed_passwword = db.get_hash(password, salt)
             
