@@ -1,4 +1,5 @@
 from flask import Flask,render_template,request,redirect,url_for,session,Blueprint
+import random
 import task.task_method as task_method
 
 from datetime import timedelta
@@ -18,11 +19,28 @@ def task_practice_list():
 @task_bp.route('/task_practice_data', methods=['GET'])
 def task_practice_data():
     num = request.args.get('data')
-    return render_template('task_practice_data.html')
+    if task_method.check_task_game(num):
+        return redirect(url_for('/task_practice_list'))
+        
+    data = task_method.select_task_game(num)
+    if data != 0:
+        return render_template('task_practice_data.html',data=data)
+    else:
+        return redirect(url_for('/task_practice_list'))
 
 @task_bp.route('/task_practice_q1', methods=['GET'])
 def task_practice_q1():
-    return render_template('task_practice_q1.html')
+    num = request.args.get('data')
+    if task_method.check_task_game(num):
+        return redirect(url_for('/task_practice_list'))
+    
+    original_data = task_method.select_task_game_problem(num)
+    if original_data != 0:
+        choices_data = random.sample(original_data,len(original_data))
+        return render_template('task_practice_q1.html',data=choices_data)
+    
+    # else:
+    #     return redirect(url_for('/task_practice_list'))
 
 @task_bp.route('/task_practice_a1', methods=['GET'])
 def task_practice_a1():

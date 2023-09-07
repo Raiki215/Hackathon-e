@@ -51,3 +51,45 @@ def select_task_game_list():
         rows = 0
     return rows
 
+def check_task_game(id):
+    sql = 'SELECT private_key,delete_key FROM task_game WHERE id = %s'
+    
+    flg = False
+    
+    try :
+        connection = db.get_connection()
+        cursor =  connection.cursor()
+        cursor.execute(sql,(id,))
+        row = cursor.fetchone()
+        if row != None:
+            if row[0] == 'f':
+                flg = True
+            if row[1] == 'f':
+                flg = True
+    except psycopg2.DatabaseError:
+        flg = False
+    return flg
+
+def select_task_game(id):
+    sql = 'SELECT * FROM task_game WHERE id = %s and private_key = %s and delete_key = %s'
+    
+    try :
+        connection = db.get_connection()
+        cursor =  connection.cursor()
+        cursor.execute(sql,(id,'f','f'))
+        row = cursor.fetchone()
+    except psycopg2.DatabaseError:
+        row = 0
+    return row
+
+def select_task_game_problem(id):
+    sql = 'SELECT * FROM game_problem WHERE task_game_id = %s and delete_key = %s'
+    
+    try :
+        connection = db.get_connection()
+        cursor =  connection.cursor()
+        cursor.execute(sql,(id,'f'))
+        rows = cursor.fetchall()
+    except psycopg2.DatabaseError:
+        rows = 0
+    return rows

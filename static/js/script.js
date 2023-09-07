@@ -94,7 +94,7 @@ if(window.location.href.split('/').pop() == "task_practice_list"){
 
 }
 
-if(window.location.href.split('/').pop() == "task_practice_q1"){
+if(window.location.href.split('/').pop() == "task_practice_q1?data=1"){
     /***** ドラッグ開始時の処理 *****/
     function f_dragstart(event){
         //ドラッグするデータのid名をDataTransferオブジェクトにセット
@@ -110,12 +110,38 @@ if(window.location.href.split('/').pop() == "task_practice_q1"){
     /***** ドロップ時の処理 *****/
     function f_drop(event){
         //ドラッグされたデータのid名をDataTransferオブジェクトから取得
-        var id_name = event.dataTransfer.getData("text");
+        let id_name = event.dataTransfer.getData("text");
+        console.log(id_name);
         //id名からドラッグされた要素を取得
-        var drag_elm =document.getElementById(id_name);
+        let drag_elm =document.getElementById(id_name);
+        console.log(drag_elm);
         //ドロップ先にドラッグされた要素を追加
         event.currentTarget.appendChild(drag_elm);
         //エラー回避のため、ドロップ処理の最後にdropイベントをキャンセルしておく
         event.preventDefault();
+
+        
+        console.log(event.target.id);
+
+        if(event.target.id == 'dropbox'){
+            if(document.getElementById('form'+id_name.slice(-1)) == null){
+                const additem = document.createElement('input');
+                additem.type = 'text';
+                additem.name = 'event';
+                additem.id = `form${id_name.slice(-1)}`;
+                console.log(id_name.slice(-1));
+                additem.value = id_name.slice(-1);
+                document.querySelector('.addform').appendChild(additem);
+            }
+        }else if(event.target.id == 'q1_item'){
+            if(document.getElementById('form'+id_name.slice(-1)) != null){
+                const form = document.querySelectorAll('addform');
+                let delitem = document.getElementById('form'+id_name.slice(-1));
+                console.log(delitem.id);
+                delitem.remove();
+            }
+            
+        }
     }
+    
 }
