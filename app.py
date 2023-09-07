@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request,redirect,url_for,session
 from datetime import timedelta
 from user.user import user_bp
+from task.task import task_bp
 import string, random
 
 
@@ -9,27 +10,7 @@ app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
 
 # app.secret_key
 app.register_blueprint(user_bp)
-
-@app.route('/task_practice_list', methods=['GET'])
-def task_practice_list():
-    return render_template('task_practice_list.html')
-
-@app.route('/task_practice_data', methods=['GET'])
-def task_practice_data():
-    return render_template('task_practice_data.html')
-
-@app.route('/task_practice_q1', methods=['GET'])
-def task_practice_q1():
-    return render_template('task_practice_q1.html')
-
-@app.route('/task_practice_a1', methods=['GET'])
-def task_practice_a1():
-    return render_template('task_practice_a1.html')
-
-
-@app.route('/notification',methods=['GET'])
-def notification():
-    return render_template('notification.html')
+app.register_blueprint(task_bp)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -46,7 +27,11 @@ def mypage():
         return render_template('mypage.html')
     else :
         return redirect(url_for('index'))
-    
+
+@app.route('/notification',methods=['GET'])
+def notification():
+    return render_template('notification.html')
+
 
     
 if __name__ == '__main__':

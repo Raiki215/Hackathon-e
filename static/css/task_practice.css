@@ -23,8 +23,12 @@
 }
 
 .task_goal{
-    display:none;
+    border-right: 1px solid #000;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 10px 40px 10px 40px;
 }
+
 
 input[type="checkbox"]{
     display:none;
@@ -34,37 +38,12 @@ label[for="botton1"],label[for="botton2"],label[for="botton3"]{
     display:block;
 }
 
-#botton1:checked + .task_goal1{
-    display:block;
-    border-right: 1px solid #000;
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
-    padding: 10px 40px 10px 40px;
-}
-
-#botton2:checked + .task_goal2{
-    display:block;
-    border-right: 1px solid #000;
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
-    padding: 10px 40px 10px 40px;
-}
-
-#botton3:checked + .task_goal3{
-    display:block;
-    border-right: 1px solid #000;
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
-    padding: 10px 40px 10px 40px;
-}
-
-.task_title{
+[class^="task_title"]{
     margin-top: 10px;
     padding: 10px 0px 10px 40px;
     cursor: pointer;
     border: 1px solid #000;
 }
-
 
 .task_data{
     width: 80%;

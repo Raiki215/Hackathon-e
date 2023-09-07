@@ -7,7 +7,7 @@
     <title>タスク管理システム</title>
 </head>
 <body>
-    <a href="{{url_for('task_practice_list')}}" class="cancel_button">◀ 中止する</a>
+    <a href="{{url_for('task.task_practice_list')}}" class="cancel_button">◀ 中止する</a>
 
     <div class="q_main">
         <p class="task_list_title question">Q．右のアイテムに優先順位を決めて左に並び替えよう。</p>
@@ -19,7 +19,7 @@
         <div id="dropbox" ondragover="f_dragover(event)" ondrop="f_drop(event)">
         </div>
     </div>
-    <a href="{{url_for('task_practice_a1')}}" class="q1_botton">答え合わせ</a>
+    <a href="{{url_for('task.task_practice_a1')}}" class="q1_botton">答え合わせ</a>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>
 </html>

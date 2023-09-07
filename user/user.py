@@ -8,8 +8,8 @@ user_bp = Blueprint('user', __name__, '/user')
 @user_bp.route('/',methods=['POST'])
 def login():
     
-    mail  =request.form.get('mail')
-    password  =request.form.get('password')
+    mail = request.form.get('mail')
+    password = request.form.get('password')
     if user_method.login(mail, password):
         user=user_method.after_login(mail)
         if user != None:

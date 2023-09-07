@@ -63,6 +63,37 @@ if(window.location.href.split('/').pop() == "home"){
     }
 }
 
+if(window.location.href.split('/').pop() == "task_practice_list"){
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const labels = document.querySelectorAll('label');
+        const labelCount = labels.length;
+        
+        let name = [];
+        let goalname = [];
+        labels.forEach((label) => {
+            const su = label.className.slice(-1);
+            name.push('botton' + su);
+            goalname.push('task_goal' + su);
+        });
+        
+        for(let i = 0;i < labelCount;i++){
+            const checkebox = document.getElementById(name[i]);
+            const element = document.getElementById(goalname[i]);
+
+            function toggleElementVisibility(){
+                if(checkebox.checked){
+                    element.style.display = "block";
+                }else{
+                    element.style.display = "none";
+                }
+            }
+            checkebox.addEventListener("change",toggleElementVisibility);
+            toggleElementVisibility();
+        }
+    });
+
+}
+
 if(window.location.href.split('/').pop() == "task_practice_q1"){
     /***** ドラッグ開始時の処理 *****/
     function f_dragstart(event){
