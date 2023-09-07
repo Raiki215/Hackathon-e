@@ -5,19 +5,19 @@
 
 {% block content %}
 <div class="main">
-    <a href="" class="task_practice_button">タスク管理の練習をする</a>
+    <a href="{{url_for('task.task_practice_list')}}" class="task_practice_button">タスク管理の練習をする</a>
     <div class="wrapper">
         <h1 id="c_header"></h1>
         <div id="next-prev-button">
             <button id="prev" onclick="prev()">‹</button>
             <button id="next" onclick="next()">›</button>
-        </div>        
+        </div>
         <div id="calendar"></div>
     </div>
 
     <div>
         <h1 class="task_title">締め切りが近いタスク一覧</h1>
-        <div class="">
+        <div>
             <p class="item taskname">タスク名</p>
             <p class="item taskdate taskline">期限</p>
             <p class="item progress taskline">進行度</p>

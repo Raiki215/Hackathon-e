@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/task_practice.css')}}">
+    <title>タスク管理システム</title>
+</head>
+<body>
+    <a href="{{url_for('task.task_practice_list')}}" class="cancel_button">◀ 中止する</a>
+
+    <div class="q_main">
+        <p class="task_list_title question">Q．右のアイテムに優先順位を決めて左に並び替えよう。</p>
+        <div id="q1_item" ondragover="f_dragover(event)" ondrop="f_drop(event)">
+            <p class="item" id="item1" alt="item1" draggable="true" ondragstart="f_dragstart(event)">アイテム１</p>
+            <p class="item" id="item2" alt="item2" draggable="true" ondragstart="f_dragstart(event)">アイテム2</p>
+            <p class="item" id="item3" alt="item3" draggable="true" ondragstart="f_dragstart(event)">アイテム3</p>
+        </div>
+        <div id="dropbox" ondragover="f_dragover(event)" ondrop="f_drop(event)">
+        </div>
+    </div>
+    <a href="{{url_for('task.task_practice_a1')}}" class="q1_botton">答え合わせ</a>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+</body>
+</html>

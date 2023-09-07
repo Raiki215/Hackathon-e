@@ -1,7 +1,7 @@
 import psycopg2
 import sys
 sys.path.append('..')
-import db 
+import db
 
 def insert_task(name,user_id,category_id,deadline,prog):
     sql='INSERT INTO task(id, task_name, category_id, user_id, progress, registration_date, completion_date, delete_key) VALUES(default, %s, %s, %s, %s, current_timestamp, %s, false)'
@@ -34,10 +34,20 @@ def select_category_id():
         category=cursor.fetchall()    
     except psycopg2.DatabaseError :
         category==None
-        
     finally :
         cursor.close()
         connection.close()
+     return category
+  
+def select_task_game_list():
+    sql = 'SELECT id,title, goal FROM task_game WHERE private_key = %s and delete_key = %s'
     
-    return category
+    try :
+        connection = db.get_connection()
+        cursor =  connection.cursor()
+        cursor.execute(sql,('f','f'))
+        rows = cursor.fetchall()
+    except psycopg2.DatabaseError:
+        rows = 0
+    return rows
 
