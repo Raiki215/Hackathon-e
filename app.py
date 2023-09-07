@@ -1,7 +1,9 @@
 from flask import Flask,render_template,request,redirect,url_for,session
 from datetime import timedelta
 from user.user import user_bp
+
 from task.task import task_bp
+from admin.admin import admin_bp
 import string, random
 
 
@@ -20,7 +22,6 @@ def index():
     else :
         return render_template('index.html', msg=msg)
     
-
 @app.route('/mypage', methods=['GET'])
 def mypage():
     if 'user' in session:
@@ -28,11 +29,12 @@ def mypage():
     else :
         return redirect(url_for('index'))
 
+app.register_blueprint(admin_bp)
+app.permanent_session_lifetime = timedelta(minutes=5)
+
 @app.route('/notification',methods=['GET'])
 def notification():
     return render_template('notification.html')
-
-
     
 if __name__ == '__main__':
     app.run(debug=True)
