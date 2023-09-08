@@ -20,6 +20,7 @@
         </div>
     </div>
     <form action="{{url_for('task.task_practice_a1')}}" class="addform" method="post">
+        <input type="hidden" name="q" value="{{data[0][1]}}">
         <input type="submit" class="q1_botton" value="答え合わせ">
     </form>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>

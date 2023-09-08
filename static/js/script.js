@@ -94,7 +94,7 @@ if(window.location.href.split('/').pop() == "task_practice_list"){
 
 }
 
-if(window.location.href.split('/').pop() == "task_practice_q1?data=1"){
+if(window.location.href.split('/').pop() == "task_practice_q1"){
     /***** ドラッグ開始時の処理 *****/
     function f_dragstart(event){
         //ドラッグするデータのid名をDataTransferオブジェクトにセット
@@ -126,7 +126,7 @@ if(window.location.href.split('/').pop() == "task_practice_q1?data=1"){
         if(event.target.id == 'dropbox'){
             if(document.getElementById('form'+id_name.slice(-1)) == null){
                 const additem = document.createElement('input');
-                additem.type = 'text';
+                additem.type = 'hidden';
                 additem.name = 'event';
                 additem.id = `form${id_name.slice(-1)}`;
                 console.log(id_name.slice(-1));
