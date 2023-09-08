@@ -1,4 +1,5 @@
 import psycopg2
+import psycopg2.extras
 import sys
 sys.path.append('..')
 import db
@@ -46,30 +47,27 @@ def mail_search(mail):
     
     try:
         connection = db.get_connection()
-        cursor = connection.cursor()
+        cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
         mail = mail + '%'
         cursor.execute(sql,(mail,))
         
         results = cursor.fetchall()
-        user_mail = []
-        add_mail = []
         
-        for result in results:
-            user_mail.append(result)
-            
-        for mail in user_mail:
-            if mail != 'admin@morijyobi.ac.jp':
-                add_mail.append(mail)  
-                
+        dict_result = []
+        for row in results:
+            dict_result.append(dict(row))
+        print(dict_result)
+        return dict_result
+        
                 
         
     except psycopg2.DatabaseError:
-        user_mail = None
+        results = None
     finally:
         cursor.close()
         connection.close()
         
-    return add_mail
+    return results
     
     
         

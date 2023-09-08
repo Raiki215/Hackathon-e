@@ -8,17 +8,9 @@
 </head>
 <body>
 
-    <form action="{{url_for('team.mail_search')}}" method="post">
-        <input type="text" name="mail">
-        <button type="submit">検索</button>
-    </form>
-    {% if error != null %}
-    <p>{{error}}</p>
-    {% endif %}
-    {% if user_mail != null %}
-    {% for user_mail in user_mail %}
-    {{user_mail}}
-    {% endfor %}
-    {% endif %}
+    <input type="text" name="mail" id="mail" placeholder="example@gmail.com">
+    <button id="push_btn" type="button">検索</button>
+    <div id="result"></div>
+
 </body>
 </html>
