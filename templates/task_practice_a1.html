@@ -12,26 +12,25 @@
         <div class="score">
             <p>スコア</p>
             <div class="score_point">
-                <p class="user_score_point">{{user_score}}</p><div class="score_line"></div><p class="answer_score_point">{{score}}</p>
+                <p class="user_score_point">10</p><div class="score_line"></div><p class="answer_score_point">40</p>
             </div>
         </div>
         <p class="task_list_title question">Q．右のアイテムに優先順位を決めて左に並び替えよう。</p>
         <div class="q1_answer">
             <p class="q1_answer_title">答え</p>
-            {% for an in answer %}
-                <p class="q1_answer_item">{{an[2]}}</p>
-            {% endfor %}
+            <p class="q1_answer_item">答え1</p>
+            <p class="q1_answer_item">答え2</p>
+            <p class="q1_answer_item">答え3</p>
+            <p class="q1_answer_item">答え4</p>
         </div>
         <div class="q1_user_answer">
             <p class="q1_answer_title">貴方の答え</p>
-            {% for user_a in user_answer %}
-                <p class="q1_answer_item">{{user_a[2]}}</p>
-            {% endfor %}
+            <p class="q1_answer_item">利用者答え1</p>
+            <p class="q1_answer_item">利用者答え2</p>
+            <p class="q1_answer_item">利用者答え3</p>
+            <p class="q1_answer_item">利用者答え4</p>
         </div>
     </div>
-    <form action="{{url_for('task.task_practice_q2')}}" class="" method="post">
-        <input type="hidden" name="q" value="{{task_q}}">
-        <input type="submit" class="q1_answer_botton" value="次へ">
-    </form>
+    <a href="" class="q1_answer_botton">次へ</a>
 </body>
 </html>

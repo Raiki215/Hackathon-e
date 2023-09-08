@@ -12,17 +12,14 @@
     <div class="q_main">
         <p class="task_list_title question">Q．右のアイテムに優先順位を決めて左に並び替えよう。</p>
         <div id="q1_item" ondragover="f_dragover(event)" ondrop="f_drop(event)">
-            {% for d in data %}
-                <p class="item" id="item{{d[0]}}" alt="item{{d[0]}}" draggable="true" ondragstart="f_dragstart(event)">{{d[2]}}</p>
-            {% endfor %}
+            <p class="item" id="item1" alt="item1" draggable="true" ondragstart="f_dragstart(event)">アイテム１</p>
+            <p class="item" id="item2" alt="item2" draggable="true" ondragstart="f_dragstart(event)">アイテム2</p>
+            <p class="item" id="item3" alt="item3" draggable="true" ondragstart="f_dragstart(event)">アイテム3</p>
         </div>
         <div id="dropbox" ondragover="f_dragover(event)" ondrop="f_drop(event)">
         </div>
     </div>
-    <form action="{{url_for('task.task_practice_a1')}}" class="addform" method="post">
-        <input type="hidden" name="q" value="{{data[0][1]}}">
-        <input type="submit" class="q1_botton" value="答え合わせ">
-    </form>
+    <a href="{{url_for('task.task_practice_a1')}}" class="q1_botton">答え合わせ</a>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>
 </html>
