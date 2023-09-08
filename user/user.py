@@ -69,3 +69,7 @@ def register_exe():
         error = '登録に失敗しました'
         return render_template('register.html', error=error)
     
+@user_bp.route('/user_edit',methods=['POST'])
+def user_edit():
+    id = session['user']
+    print(id)
