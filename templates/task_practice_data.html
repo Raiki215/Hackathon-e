@@ -8,13 +8,16 @@
 </head>
 <body>
     <div class="task_data">
-        <h1 class="task_list_title task_data_title">タイトル：文化祭</h1>
+        <h1 class="task_list_title task_data_title">{{data[1]}}</h1>
         <div class="task_data_explanation">
-            <p>◆ゴール<br>学校の文化祭で食べ物を売る</p>
-            <p>Aさんは学校の文化祭でクレープやたこ焼きなど食べ物を売りたいと考えている。文化祭本番に間に合うように予定を立てよう。テキストテキストテキストテキスト</p>
+            <p>◆ゴール<br>{{data[2]}}</p>
+            <p>{{data[3]}}</p>
         </div>
         <div class="botton_center">
-            <a href="{{url_for('task.task_practice_q1')}}" class="next_botton">次へ</a><br>
+            <form action="{{url_for('task.task_practice_q1')}}" class="" method="post">
+                <input type="hidden" name="data" value="{{data[0]}}">
+                <input type="submit" class="q_end_botton" value="次へ">
+            </form>
             <a href="{{url_for('task.task_practice_list')}}" class="return">戻る</a>
         </div>
     </div>
