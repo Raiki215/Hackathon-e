@@ -22,16 +22,13 @@
             <p class="item taskdate taskline">期限</p>
             <p class="item progress taskline">進行度</p>
         </div>
-        <div class="task_item">
-            <p class="item taskname">タスク名</p>
-            <p class="item taskdate">xxxx/xx/xx<br>〇日</p>
-            <p class="item progress">進行中</p>
-        </div>
-        <div class="task_item">
-            <p class="item taskname">タスク名</p>
-            <p class="item taskdate">xxxx/xx/xx<br>〇日</p>
-            <p class="item progress">進行中</p>
-        </div>
+        {% for t in task_list %}
+            <div class="task_item">
+                <p class="item taskname">{{t[0]}}</p>
+                <p class="item taskdate">{{t[1]}}<br>{{t[2]}}日</p>
+                <p class="item progress">{{t[3]}}</p>
+            </div>
+        {% endfor %}
     </div>
 </div>
 <script src="{{url_for('static', filename='js/script.js')}}"></script>
