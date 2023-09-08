@@ -3,7 +3,7 @@ import user.user_method as user_method
 from datetime import timedelta
 
 
-user_bp = Blueprint('user', __name__, '/user')
+user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 @user_bp.route('/',methods=['POST'])
 def login():
