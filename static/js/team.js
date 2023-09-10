@@ -35,7 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     push.addEventListener('click', function() {
         const search = document.getElementById("mail").value;
-        search_result(search)
+        if (!search.value){
+            console.log('何も入ってない')
+        } else {
+            search_result(search)
+        }
     })
     async function search_result(search) {
 

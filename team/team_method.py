@@ -43,7 +43,7 @@ def insert_team_member(user_id, team_id):
 
 
 def mail_search(mail):
-    sql = 'SELECT email FROM task_account WHERE email LIKE %s'
+    sql = "SELECT email FROM task_account WHERE email LIKE %s and email NOT LIKE 'admin@morijyobi.ac.jp'"
     
     try:
         connection = db.get_connection()
