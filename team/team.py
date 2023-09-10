@@ -2,6 +2,10 @@ from flask import Blueprint, render_template, session, redirect, url_for, reques
 import team.team_method as team_method
 import asyncio
 import json
+import cgi
+
+
+
 team_bp = Blueprint('team', __name__, url_prefix='/team')
 
 @team_bp.route('/team_register')
@@ -24,8 +28,16 @@ def team_register_exe():
 
 @team_bp.route('/mail_search',methods=['POST'])
 def mail_search():
-    # mail = request.form.get('mail')
-    mail = ''
+    mail = request.data
+    
+    # data = request.data
+    # print(data)
+    # print(mail)
+    mail = mail.decode()
+    
+    
+    print(mail)
+    
     
     result = team_method.mail_search(mail)
     

@@ -48,7 +48,7 @@ def mail_search(mail):
     try:
         connection = db.get_connection()
         cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        mail = mail + '%'
+        mail = '%' + mail + '%'
         cursor.execute(sql,(mail,))
         
         results = cursor.fetchall()
