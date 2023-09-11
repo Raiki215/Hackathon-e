@@ -1,6 +1,6 @@
 from flask import Blueprint, Flask, render_template, redirect, session, url_for, request
 import admin.admin_method as admin_method
-admin_bp = Blueprint('admin', __name__, '/admin')
+admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 @admin_bp.route('/')
 def admin():
@@ -37,12 +37,12 @@ def admin_home():
     if 'admin' in session:
         return render_template('admin_home.html')
     else:
-        return redirect('/')
+        return redirect(url_for('admin.admin'))
     
 @admin_bp.route('/admin_logout')
 def admin_logout():
     session.pop('admin', None)
     session.permanent = True
-    return redirect('/')
+    return redirect(url_for('admin.admin'))
     
     
