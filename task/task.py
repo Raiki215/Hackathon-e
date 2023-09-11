@@ -38,6 +38,12 @@ def post_add_task():
     else:
         return redirect(url_for('task.add_task'))
     
+@task_bp.route('/task_sharing_list')
+def task_shar_list():
+    user_id = session['user'][0]
+    team_list = task_method.select_team(user_id)
+    return render_template('team.html')
+
 @task_bp.route('/task_sharing')
 def task_sher():
     # task_category_id = 1
