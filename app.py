@@ -1,6 +1,7 @@
-from flask import Flask,render_template,request,redirect,url_for,session
+from flask import Flask,render_template,request,redirect,url_for,session, Blueprint
 from datetime import timedelta
 from user.user import user_bp
+from task.task import task_bp
 import string, random
 
 
@@ -9,6 +10,7 @@ app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
 
 # app.secret_key
 app.register_blueprint(user_bp)
+app.register_blueprint(task_bp)
 
 @app.route('/notification',methods=['GET'])
 def notification():
