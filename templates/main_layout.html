@@ -14,12 +14,12 @@
     <a href="{{url_for('notification')}}" class="material-icons miCSS notification_button">notifications</a>
     <aside>
         <ul class="main_menu">
-            <li><a href="">ユーザ名</a></li>
+            <li><a href="">{{session['user'][1]}}</a></li>
             <li><a href="{{url_for('user.logout')}}">ログアウト</a></li>
-            <li><a href="">ホーム</a></li>
-            <li><a href="{{url_for('task.add_task')}}">タスク一覧</a></li>
+            <li><a href="{{url_for('user.home')}}">ホーム</a></li>
+            <li><a href="">タスク一覧</a></li>
             <li><a href="">チーム一覧</a></li>
-            <li><a href="">タスク管理練習</a></li>
+            <li><a href="{{url_for('task.task_practice_list')}}">タスク管理練習</a></li>
         </ul>
     </aside>
 {% block content %}

@@ -62,3 +62,86 @@ if(window.location.href.split('/').pop() == "home"){
         return calendar;
     }
 }
+
+if(window.location.href.split('/').pop() == "task_practice_list"){
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const labels = document.querySelectorAll('label');
+        const labelCount = labels.length;
+        
+        let name = [];
+        let goalname = [];
+        labels.forEach((label) => {
+            const su = label.className.slice(-1);
+            name.push('botton' + su);
+            goalname.push('task_goal' + su);
+        });
+        
+        for(let i = 0;i < labelCount;i++){
+            const checkebox = document.getElementById(name[i]);
+            const element = document.getElementById(goalname[i]);
+
+            function toggleElementVisibility(){
+                if(checkebox.checked){
+                    element.style.display = "block";
+                }else{
+                    element.style.display = "none";
+                }
+            }
+            checkebox.addEventListener("change",toggleElementVisibility);
+            toggleElementVisibility();
+        }
+    });
+
+}
+
+if(window.location.href.split('/').pop() == "task_practice_q1"){
+    /***** ドラッグ開始時の処理 *****/
+    function f_dragstart(event){
+        //ドラッグするデータのid名をDataTransferオブジェクトにセット
+        event.dataTransfer.setData("text", event.target.id);
+    }
+    
+    /***** ドラッグ要素がドロップ要素に重なっている間の処理 *****/
+    function f_dragover(event){
+        //dragoverイベントをキャンセルして、ドロップ先の要素がドロップを受け付けるようにする
+        event.preventDefault();
+    }
+    
+    /***** ドロップ時の処理 *****/
+    function f_drop(event){
+        //ドラッグされたデータのid名をDataTransferオブジェクトから取得
+        let id_name = event.dataTransfer.getData("text");
+        console.log(id_name);
+        //id名からドラッグされた要素を取得
+        let drag_elm =document.getElementById(id_name);
+        console.log(drag_elm);
+        //ドロップ先にドラッグされた要素を追加
+        event.currentTarget.appendChild(drag_elm);
+        //エラー回避のため、ドロップ処理の最後にdropイベントをキャンセルしておく
+        event.preventDefault();
+
+        
+        console.log(event.target.id);
+
+        if(event.target.id == 'dropbox'){
+            if(document.getElementById('form'+id_name.slice(-1)) == null){
+                const additem = document.createElement('input');
+                additem.type = 'hidden';
+                additem.name = 'event';
+                additem.id = `form${id_name.slice(-1)}`;
+                console.log(id_name.slice(-1));
+                additem.value = id_name.slice(-1);
+                document.querySelector('.addform').appendChild(additem);
+            }
+        }else if(event.target.id == 'q1_item'){
+            if(document.getElementById('form'+id_name.slice(-1)) != null){
+                const form = document.querySelectorAll('addform');
+                let delitem = document.getElementById('form'+id_name.slice(-1));
+                console.log(delitem.id);
+                delitem.remove();
+            }
+            
+        }
+    }
+    
+}
