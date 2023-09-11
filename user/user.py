@@ -3,7 +3,7 @@ import user.user_method as user_method
 from datetime import timedelta
 
 
-user_bp = Blueprint('user', __name__, '/user')
+user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 @user_bp.route('/',methods=['POST'])
 def login():
@@ -14,7 +14,7 @@ def login():
         user=user_method.after_login(mail)
         if user != None:
             session['user'] = [user[0], user[1], mail] # session にキー：'user', 0にid 1に名前
-            return redirect('/home')
+            return redirect(url_for('user.home'))
         else :
             error = 'ログインに失敗しました'
             input_data = {
@@ -69,7 +69,18 @@ def register_exe():
         error = '登録に失敗しました'
         return render_template('register.html', error=error)
     
-@user_bp.route('/user_edit',methods=['POST'])
+@user_bp.route('/user_edit')
 def user_edit():
-    id = session['user']
-    print(id)
+    print('aaaaaaa')
+    user_id = session['user']
+    if user_id:
+        id = user_id[0]
+        user_list = user_method.get_user_list(id)
+
+    else:
+        redirect(url_for('login'))
+    print(user_list)
+
+    return render_template('user_edit.html')
+
+    

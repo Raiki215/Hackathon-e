@@ -71,3 +71,21 @@ def after_login(mail):
         connection.close()
     
     return user
+
+
+def get_user_list(id):
+    sql = 'SELECT * FROM task_account WHERE id = %s'
+    try:
+        connection = db.get_connection()
+        cursor =  connection.cursor()
+        cursor.execute(sql, (id,))
+        user_list = cursor.fetchall()
+    
+    except psycopg2.DatabaseError:
+        print('error')
+    
+    finally:
+        cursor.close()
+        connection.close()
+
+    return user_list
