@@ -1,6 +1,12 @@
 from flask import Flask,render_template,request,redirect,url_for,session, Blueprint
 from datetime import timedelta
 from user.user import user_bp
+<<<<<<< HEAD
+=======
+
+from task.task import task_bp
+from admin.admin import admin_bp
+>>>>>>> origin/main
 from task.task import task_bp
 import string, random
 
@@ -11,10 +17,13 @@ app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
 # app.secret_key
 app.register_blueprint(user_bp)
 app.register_blueprint(task_bp)
+<<<<<<< HEAD
 
 @app.route('/notification',methods=['GET'])
 def notification():
     return render_template('notification.html')
+=======
+>>>>>>> origin/main
 
 @app.route('/', methods=['GET'])
 def index():
@@ -24,14 +33,24 @@ def index():
     else :
         return render_template('index.html', msg=msg)
     
-
 @app.route('/mypage', methods=['GET'])
 def mypage():
     if 'user' in session:
         return render_template('mypage.html')
     else :
         return redirect(url_for('index'))
-    
+
+app.register_blueprint(admin_bp)
+app.register_blueprint(task_bp)
+app.permanent_session_lifetime = timedelta(minutes=5)
+
+@app.route('/')
+def index():
+    return redirect(url_for('user.index'))
+
+@app.route('/notification',methods=['GET'])
+def notification():
+    return render_template('notification.html')
 
     
 if __name__ == '__main__':

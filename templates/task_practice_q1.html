@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/task_practice.css')}}">
+    <title>タスク管理システム</title>
+</head>
+<body>
+    <a href="{{url_for('task.task_practice_list')}}" class="cancel_button">◀ 中止する</a>
+
+    <div class="q_main">
+        <p class="task_list_title question">Q．右のアイテムに優先順位を決めて左に並び替えよう。</p>
+        <div id="q1_item" ondragover="f_dragover(event)" ondrop="f_drop(event)">
+            {% for d in data %}
+                <p class="item" id="item{{d[0]}}" alt="item{{d[0]}}" draggable="true" ondragstart="f_dragstart(event)">{{d[2]}}</p>
+            {% endfor %}
+        </div>
+        <div id="dropbox" ondragover="f_dragover(event)" ondrop="f_drop(event)">
+        </div>
+    </div>
+    <form action="{{url_for('task.task_practice_a1')}}" class="addform" method="post">
+        <input type="hidden" name="q" value="{{data[0][1]}}">
+        <input type="submit" class="q1_botton" value="答え合わせ">
+    </form>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+</body>
+</html>

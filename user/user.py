@@ -1,22 +1,39 @@
 from flask import Flask,render_template,request,redirect,url_for,session,Blueprint
 import user.user_method as user_method
+import task.task_method as task_method
 from datetime import timedelta
+import datetime
 
 
-user_bp = Blueprint('user', __name__, '/user')
+user_bp = Blueprint('user', __name__, url_prefix='/user')
+<<<<<<< HEAD
 
-@user_bp.route('/',methods=['POST'])
+@user_bp.route('/')
+def index():
+    msg = request.args.get('msg')
+    if msg == None:
+        msg = ""
+    return render_template('index.html',msg=msg)
+=======
+@user_bp.route('/')
+def index():
+    msg = request.args.get('msg')
+    return render_template('index.html', msg=msg)
+
+>>>>>>> 41bb42deafe8091a990e5bfaf0ac757ca610c8e3
+
+@user_bp.route('/login',methods=['POST'])
 def login():
     
-    mail  =request.form.get('mail')
-    password  =request.form.get('password')
+    mail = request.form.get('mail')
+    password = request.form.get('password')
     if user_method.login(mail, password):
         user=user_method.after_login(mail)
         if user != None:
             session['user'] = [user[0], user[1], mail] # session にキー：'user', 0にid 1に名前
-            return redirect('/home')
+            return redirect(url_for('user.home'))
         else :
-            error = 'ログインに失敗しました'
+            error_list.append('ログインに失敗しました')
             input_data = {
             'mail': mail,
             'password': password
@@ -27,17 +44,24 @@ def login():
 def logout():
     session.pop('user', None)
     session.permanent = True
-    user_bp.permanent_session_lifetime = timedelta(minutes=1)
-    return redirect(url_for('index'))
+    return redirect(url_for('user.index'))
 
 @user_bp.route('/home', methods=['GET'])
 def home():
     if 'user' in session:
-        
-        return render_template('home.html')
+        task = task_method.select_latest_task(session['user'][0])
+        task_list = []
+        for t in task:
+            task_day = t[8].strftime('%Y/%m/%d')
+            dt_now = datetime.datetime.now()
+            task_d_day = t[8]
+            difference = task_d_day - dt_now
+            task_progress = task_method.select_progress(t[5])
+            task_list.append([t[1],task_day,difference.days,task_progress[1]])
+        return render_template('home.html',task=task,task_list=task_list)
     else :
         
-        return redirect(url_for('index'))
+        return redirect(url_for('user.index'))
 
 @user_bp.route('/register')
 def register_form():
@@ -49,24 +73,48 @@ def register_exe():
     mail = request.form.get('mail')
     password = request.form.get('password')
     password2 = request.form.get('password2')
-    if name == '':
-        error = 'ユーザー名が未入力です'
-        return render_template('register.html', error=error,name=name,password=password,password2=password2)
-    if mail == '':
-        error = 'メールアドレスが未入力です'
-        return render_template('register.html', error=error,name=name,password=password,password2=password2)
-    if password == '':
-        error = 'パスワードが未入力です'
-        return render_template('register.html', error=error,name=name,password=password,password2=password2)
-    if password2 == '':
-        error = 'メールアドレス(確認用)が未入力です'
-        return render_template('register.html', error=error,name=name,password=password,password2=password2)
-    if password==password2:
-        count = user_method.insert_user(mail,name,password)
-    if count == 1:
-        msg = '登録が完了しました'
-        return redirect(url_for('index', msg=msg))
-    else:
-        error = '登録に失敗しました'
-        return render_template('register.html', error=error)
+    error_list = []
+<<<<<<< HEAD
     
+    
+    if name == '':
+        error_list.append('ユーザー名が未入力です')
+    if mail == '':
+        error_list.append('メールアドレスが未入力です')
+    if password == '':
+        error_list.append('パスワードが未入力です')
+    if password2 == '':
+        error_list.append('メールアドレス(確認用)が未入力です')
+        
+    if len(error_list) == 0:    
+=======
+    if name == '':
+        error_list.append('ユーザー名が未入力です')
+    if mail == '':
+        error_list.append('メールアドレスが未入力です')
+    if password == '':
+        error_list.append('パスワードが未入力です')
+    if password2 == '':
+        error_list.append('メールアドレス(確認用)が未入力です')
+        
+    
+    if len(error_list) == 0:
+>>>>>>> 41bb42deafe8091a990e5bfaf0ac757ca610c8e3
+        if password==password2:
+            count = user_method.insert_user(mail,name,password)
+            if count == 1:
+                msg = '登録が完了しました'
+                return redirect(url_for('user.index', msg=msg))
+<<<<<<< HEAD
+            else:
+                error_list.append('登録に失敗しました')
+                return render_template('register.html', error=error_list)
+    else :
+        return render_template('register.html',error=error_list)
+=======
+            else :
+                error_list.append('登録に失敗しました')
+        else:
+            error_list.append("パスワードが一致しません")
+    return render_template('register.html', error_list=error_list,name=name,password=password,password2=password2)
+>>>>>>> 41bb42deafe8091a990e5bfaf0ac757ca610c8e3

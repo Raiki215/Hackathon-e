@@ -1,0 +1,28 @@
+{% extends "main_layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='/css/task_practice.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="main">
+    <h1 class="task_list_title">タスク管理練習一覧</h1>
+    {% if msg != None %}
+    <p>{{msg}}</p>
+    {% endif %}
+    {% for t in task %}
+        <div class="task_list_item">
+            <label for="botton{{t[0]}}" class="task_title{{t[0]}}">{{t[1]}}
+                <!-- <a href="{{url_for('task.task_practice_data')}}?data={{t[0]}}" class="start_botton">始める</a> -->
+                <form action="{{url_for('task.task_practice_data')}}" class="" method="post">
+                    <input type="hidden" name="data" value="{{t[0]}}">
+                    <input type="submit" class="start_botton" value="始める">
+                </form>
+            </label>
+            <input type="checkbox" id="botton{{t[0]}}" class="list_checkbox">
+            <div class="task_goal" id="task_goal{{t[0]}}" style="display: none;">◆ゴール<br>{{t[2]}}</div>
+        </div>
+    {% endfor %}
+
+</div>
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+{% endblock %}

@@ -12,7 +12,7 @@
 
     {% if msg != null %}
     <p style="color:blue">{{msg}}</p>
-    {% endif %}
+    {%  endif %}
 
     <form action="{{url_for('user.login')}}" method="post">
         メールアドレス：<input type="text" name="mail"><br>
