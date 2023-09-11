@@ -4,6 +4,7 @@ import task.task_method as task_method
 
 from datetime import timedelta
 
+
 task_bp = Blueprint('task', __name__, url_prefix='/task')
 
 @task_bp.route('/task')
