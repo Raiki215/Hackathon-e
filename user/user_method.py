@@ -79,7 +79,7 @@ def get_user_list(id):
         connection = db.get_connection()
         cursor =  connection.cursor()
         cursor.execute(sql, (id,))
-        user_list = cursor.fetchall()
+        user_list = cursor.fetchone()
     
     except psycopg2.DatabaseError:
         print('error')
@@ -89,3 +89,6 @@ def get_user_list(id):
         connection.close()
 
     return user_list
+
+def edit_user():
+    

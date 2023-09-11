@@ -71,16 +71,14 @@ def register_exe():
     
 @user_bp.route('/user_edit')
 def user_edit():
-    print('aaaaaaa')
     user_id = session['user']
     if user_id:
         id = user_id[0]
         user_list = user_method.get_user_list(id)
-
     else:
         redirect(url_for('login'))
     print(user_list)
 
-    return render_template('user_edit.html')
+    return render_template('user_edit.html',user=user_list)
 
     
