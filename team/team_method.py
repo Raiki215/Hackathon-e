@@ -68,3 +68,23 @@ def mail_search(mail):
         connection.close()
         
     return results
+
+def team_id(user_id):
+    sql = 'SELECT MAX(id) FROM team WHERE team_admin_id = %s'
+    try:
+        connection = db.get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql,(user_id,))
+        
+        result = cursor.fetchone()
+        
+        for id in result:
+            team_id = id
+        
+    except psycopg2.DatabaseError:
+        team_id = 0
+    finally:
+        cursor.close()
+        connection.close()
+    return team_id

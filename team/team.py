@@ -36,9 +36,34 @@ def mail_search():
     mail = mail.decode()
     
     
-    print(json.loads(mail)["word"])
+    # print(json.loads(mail)["word"])
     
     
     result = team_method.mail_search(json.loads(mail)["word"])
     
     return jsonify(result)
+
+
+@team_bp.route('/invite_member',methods=['POST'])
+def invite_member():
+    invite_list = request.data
+    
+    invite_list = invite_list.decode()
+    
+    invite_list = json.loads(invite_list)
+    
+    print(invite_list)
+    
+    user_id = 2
+    team_id = team_method.team_id(user_id)
+    
+    print(team_id)
+    
+    for list in invite_list['invite_list']:
+        print(list)
+        count = team_method.insert_team_member(list['id'],team_id)
+        if count != 1:
+            break
+    print(count)
+    
+    return jsonify(count)

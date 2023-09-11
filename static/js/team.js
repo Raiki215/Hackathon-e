@@ -13,10 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })
 
-    confirm_btn.addEventListener('click', function(){
-
-    })
-
+    
 
 
 
@@ -70,6 +67,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+
+    confirm_btn.addEventListener('click', function(){
+        console.log(confirm_btn)
+        invite_member(invite_list)
+    })
+    
+
+
+
+
 })
 function invite_member_list(list){
     const invite_result = document.getElementById('invite_result')
@@ -101,3 +108,22 @@ function invite_member_list(list){
 //listを取得する
 //python側にpostで送る
 //python側にチームメンバー登録プログラムにfetchでjson形式のlistを送る
+
+
+
+async function invite_member(list){
+    try{
+        await fetch('http://127.0.0.1:5000/team/invite_member', {
+                method: "POST",   // HTTP-Methodを指定する！
+                headers: {
+                    'Content-Type': 'application/json'  //どういう形式のデータを渡すか
+                },
+                body: JSON.stringify({"invite_list":list})
+    })
+    .then(res => {
+        return res.json()
+    })
+    } catch(error) {
+        console.log('エラー',error)
+    }
+}
