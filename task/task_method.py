@@ -4,13 +4,13 @@ sys.path.append('..')
 import db
 
 def insert_task(name,user_id,category_id,deadline,prog):
-    sql='INSERT INTO task(id, task_name, category_id, user_id, progress, registration_date, completion_date, delete_key) VALUES(default, %s, %s, %s, %s, current_timestamp, %s, false)'
+    sql='INSERT INTO task(id, task_name, task_category_id, user_id, progress, registration_date, completion_date, delete_key) VALUES(default, %s, %s, %s, %s, current_timestamp, %s, false)'
     
     try :
         connection = db.get_connection()
         cursor = connection.cursor()
         
-        cursor.execute(sql,(name, user_id, category_id, prog, deadline))
+        cursor.execute(sql,(name, category_id, user_id, prog, deadline))
         count = cursor.rowcount #更新件数取得
         connection.commit()
     

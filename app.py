@@ -4,6 +4,7 @@ from user.user import user_bp
 
 from task.task import task_bp
 from admin.admin import admin_bp
+from task.task import task_bp
 import string, random
 
 
@@ -30,11 +31,17 @@ def mypage():
         return redirect(url_for('index'))
 
 app.register_blueprint(admin_bp)
+app.register_blueprint(task_bp)
 app.permanent_session_lifetime = timedelta(minutes=5)
+
+@app.route('/')
+def index():
+    return redirect(url_for('user.index'))
 
 @app.route('/notification',methods=['GET'])
 def notification():
     return render_template('notification.html')
+
     
 if __name__ == '__main__':
     app.run(debug=True)
