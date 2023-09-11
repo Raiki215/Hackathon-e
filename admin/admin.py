@@ -4,7 +4,8 @@ admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 @admin_bp.route('/')
 def admin():
-    return render_template('admin_login.html')
+    error = request.args.get('error')
+    return render_template('admin_login.html', error=error)
 
 @admin_bp.route('/login', methods=['POST'])
 def admin_login():
@@ -26,8 +27,7 @@ def admin_login():
     flg = admin_method.admin_login(id, password)
     if flg == True:
         session['admin'] = True
-        print('trueになったお')
-        return redirect('/admin_home')
+        return redirect(url_for('admin.admin_home'))
     else :
         error = 'パスワードかIDが間違っています'
         return redirect(url_for('admin'),error=error)

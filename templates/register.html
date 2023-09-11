@@ -7,11 +7,17 @@
 </head>
 <body>
     <h3>ユーザー登録画面</h3>
+<<<<<<< HEAD
     {% if error != null%}
     {% for error in error %}
+=======
+    {% if error_list != null%}
+    {%  for error in error_list  %}
+>>>>>>> 41bb42deafe8091a990e5bfaf0ac757ca610c8e3
     <p style="color:red">{{error}}</p>
     {% endfor %}
     {% endif %}
+
 
     <form action="{{url_for('user.register_exe')}}" method="post">
         ユーザー名：<input type="text" name="username" value="{{user_name}}"><br>
