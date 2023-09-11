@@ -12,6 +12,7 @@ app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
 # app.secret_key
 app.register_blueprint(user_bp)
 app.register_blueprint(task_bp)
+app.permanent_session_lifetime = timedelta(minutes=5)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -21,20 +22,16 @@ def index():
     else :
         return render_template('index.html', msg=msg)
     
+# @app.route('/')
+# def index():
+#     return redirect(url_for('user.index'))
+    
 @app.route('/mypage', methods=['GET'])
 def mypage():
     if 'user' in session:
         return render_template('mypage.html')
     else :
         return redirect(url_for('index'))
-
-app.register_blueprint(admin_bp)
-app.register_blueprint(task_bp)
-app.permanent_session_lifetime = timedelta(minutes=5)
-
-@app.route('/')
-def index():
-    return redirect(url_for('user.index'))
 
 @app.route('/notification',methods=['GET'])
 def notification():

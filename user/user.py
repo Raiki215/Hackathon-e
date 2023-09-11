@@ -6,7 +6,6 @@ import datetime
 
 
 user_bp = Blueprint('user', __name__, url_prefix='/user')
-<<<<<<< HEAD
 
 @user_bp.route('/')
 def index():
@@ -14,13 +13,6 @@ def index():
     if msg == None:
         msg = ""
     return render_template('index.html',msg=msg)
-=======
-@user_bp.route('/')
-def index():
-    msg = request.args.get('msg')
-    return render_template('index.html', msg=msg)
-
->>>>>>> 41bb42deafe8091a990e5bfaf0ac757ca610c8e3
 
 @user_bp.route('/login',methods=['POST'])
 def login():
@@ -74,9 +66,7 @@ def register_exe():
     password = request.form.get('password')
     password2 = request.form.get('password2')
     error_list = []
-<<<<<<< HEAD
-    
-    
+
     if name == '':
         error_list.append('ユーザー名が未入力です')
     if mail == '':
@@ -86,35 +76,16 @@ def register_exe():
     if password2 == '':
         error_list.append('メールアドレス(確認用)が未入力です')
         
-    if len(error_list) == 0:    
-=======
-    if name == '':
-        error_list.append('ユーザー名が未入力です')
-    if mail == '':
-        error_list.append('メールアドレスが未入力です')
-    if password == '':
-        error_list.append('パスワードが未入力です')
-    if password2 == '':
-        error_list.append('メールアドレス(確認用)が未入力です')
+    if len(error_list) == 0:   
         
-    
-    if len(error_list) == 0:
->>>>>>> 41bb42deafe8091a990e5bfaf0ac757ca610c8e3
         if password==password2:
             count = user_method.insert_user(mail,name,password)
             if count == 1:
                 msg = '登録が完了しました'
                 return redirect(url_for('user.index', msg=msg))
-<<<<<<< HEAD
             else:
                 error_list.append('登録に失敗しました')
                 return render_template('register.html', error=error_list)
     else :
         return render_template('register.html',error=error_list)
-=======
-            else :
-                error_list.append('登録に失敗しました')
-        else:
-            error_list.append("パスワードが一致しません")
-    return render_template('register.html', error_list=error_list,name=name,password=password,password2=password2)
->>>>>>> 41bb42deafe8091a990e5bfaf0ac757ca610c8e3
+
