@@ -1,7 +1,11 @@
-import psycopg2
+from flask import Flask,render_template
+import psycopg2 as pg
+import pandas as pd
 import sys
 sys.path.append('..')
 import db
+import sys
+import pdb
 
 def insert_task(name,user_id,category_id,deadline,prog):
     sql='INSERT INTO task(id, task_name, task_category_id, user_id, progress, registration_date, completion_date, delete_key) VALUES(default, %s, %s, %s, %s, current_timestamp, %s, false)'
@@ -14,7 +18,7 @@ def insert_task(name,user_id,category_id,deadline,prog):
         count = cursor.rowcount #更新件数取得
         connection.commit()
     
-    except psycopg2.DatabaseError :
+    except pg.DatabaseError :
         count = 0
         
     finally :
@@ -31,7 +35,7 @@ def select_latest_task(user_id):
         cursor =  connection.cursor()
         cursor.execute(sql,(user_id,'f'))
         rows = cursor.fetchall()
-    except psycopg2.DatabaseError:
+    except pg.DatabaseError:
         rows = 0
     return rows
 
@@ -45,7 +49,7 @@ def select_category_id():
         
         cursor.execute(sql)
         category=cursor.fetchall()    
-    except psycopg2.DatabaseError :
+    except pg.DatabaseError :
         category==None
     finally :
         cursor.close()
@@ -59,7 +63,7 @@ def select_progress(id):
         cursor =  connection.cursor()
         cursor.execute(sql,(id,))
         row = cursor.fetchone()
-    except psycopg2.DatabaseError:
+    except pg.DatabaseError:
         row = 0
     return row
 
@@ -101,7 +105,7 @@ def select_task_game_list():
         cursor =  connection.cursor()
         cursor.execute(sql,('f','f'))
         rows = cursor.fetchall()
-    except psycopg2.DatabaseError:
+    except pg.DatabaseError:
         rows = 0
     return rows
 
@@ -120,7 +124,7 @@ def check_task_game(id):
                 flg = True
             if row[1] == 'f':
                 flg = True
-    except psycopg2.DatabaseError:
+    except pg.DatabaseError:
         flg = False
     return flg
 
@@ -132,7 +136,7 @@ def select_task_game(id):
         cursor =  connection.cursor()
         cursor.execute(sql,(id,'f','f'))
         row = cursor.fetchone()
-    except psycopg2.DatabaseError:
+    except pg.DatabaseError:
         row = 0
     return row
 
@@ -144,7 +148,7 @@ def select_task_game_problem(id):
         cursor =  connection.cursor()
         cursor.execute(sql,(id,'f'))
         rows = cursor.fetchall()
-    except psycopg2.DatabaseError:
+    except pg.DatabaseError:
         rows = 0
     return rows
 
@@ -156,7 +160,7 @@ def select_task_game_user_answer(id):
         cursor =  connection.cursor()
         cursor.execute(sql,(id,'f'))
         row = cursor.fetchone()
-    except psycopg2.DatabaseError:
+    except pg.DatabaseError:
         row = 0
     return row
 
@@ -171,7 +175,7 @@ def insert_score(task_id,user_id,score1,score2,comprehensive_evaluation):
         count = cursor.rowcount #更新件数取得
         connection.commit()
     
-    except psycopg2.DatabaseError :
+    except pg.DatabaseError :
         count = 0
         
     finally :
@@ -188,7 +192,7 @@ def select_score(task_game_id,user_id):
         cursor =  connection.cursor()
         cursor.execute(sql,(task_game_id,user_id,'f'))
         row = cursor.fetchone()
-    except psycopg2.DatabaseError:
+    except pg.DatabaseError:
         row = 0
     return row
 
@@ -200,7 +204,7 @@ def update_score(task_id,user_id,score1,score2,comprehensive_evaluation):
         cursor.execute(sql, (score1,score2,comprehensive_evaluation,task_id,user_id))
         count = cursor.rowcount
         connection.commit()
-    except psycopg2.DatabaseError:
+    except pg.DatabaseError:
         count = 0
     finally:
         cursor.close()

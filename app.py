@@ -1,7 +1,6 @@
 from flask import Flask,render_template,request,redirect,url_for,session, Blueprint
 from datetime import timedelta
 from user.user import user_bp
-
 from admin.admin import admin_bp
 from task.task import task_bp
 import string, random
