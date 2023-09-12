@@ -12,7 +12,7 @@ app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
 # app.secret_key
 app.register_blueprint(user_bp)
 app.register_blueprint(task_bp)
-app.permanent_session_lifetime = timedelta(minutes=5)
+app.permanent_session_lifetime = timedelta(minutes=30)
 
 @app.route('/', methods=['GET'])
 def index():

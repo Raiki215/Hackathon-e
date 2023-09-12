@@ -41,23 +41,33 @@ def post_add_task():
 @task_bp.route('/task_sharing_list')
 def task_shar_list():
     user_id = session['user'][0]
-    team_list = task_method.select_team(user_id)
-    return render_template('team.html')
+    team_list_id = task_method.select_team_id(user_id)
+    team_list = []
+    for team in team_list_id:
+        team_list.append(task_method.select_team(team[1]))
+    return render_template('team_list.html',team_list=team_list)
 
-@task_bp.route('/task_sharing')
+# [(1, 'チーム名', 1, False), (4, 'ぼかろP', 5, False)]
+
+
+@task_bp.route('/task_sharing',methods=['GET'])
 def task_sher():
     # task_category_id = 1
-    team_id = 2
+    team_id = request.args.get('data')
     
     # チームのカテゴリを表示
     # カテゴリをチームIDから取得
     task_classification = task_method.task_team_category(team_id)
     # タスクをカテゴリとチームID
-    for t_class in task_classification:
-        task_shers = task_method.task_sher(t_class[0], team_id)
+    t_classid = []
+    for id in task_classification:
+        t_classid.append(id[0])
+    task_shers = []
+    for id in t_classid:
+        task_shers.append(task_method.task_sher(id, team_id))
 
         
-    return render_template('team.html', task_shers = task_shers,task_classification = task_classification)
+    return render_template('team.html', task_shers = task_shers,task_classification = task_classification,team_id=team_id,t_classid=t_classid)
   
 @task_bp.route('/task_practice_list', methods=['GET'])
 def task_practice_list():
