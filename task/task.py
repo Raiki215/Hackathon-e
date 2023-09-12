@@ -95,7 +95,7 @@ def task_sher():
             difference = task_d_day - dt_now
             days.append([task[0],difference.days])
         
-    return render_template('team.html', team_name=team_name,task_shers = task_shers,task_classification = task_classification,team_id=team_id,t_classid=t_classid,days=days)
+    return render_template('team.html', team_name=team_name,task_shers = task_shers,task_classification = task_classification,team_id=team_id,t_classid=t_classid,days=days,user_id=session['user'][0])
   
 @task_bp.route('/task_practice_list', methods=['GET'])
 def task_practice_list():
