@@ -55,6 +55,7 @@ def task_shar_list():
 def task_sher():
     # task_category_id = 1
     team_id = request.args.get('data')
+    team_name = task_method.select_team(team_id)
     
     # チームのカテゴリを表示
     # カテゴリをチームIDから取得
@@ -74,7 +75,7 @@ def task_sher():
             difference = task_d_day - dt_now
             days.append([task[0],difference.days])
         
-    return render_template('team.html', task_shers = task_shers,task_classification = task_classification,team_id=team_id,t_classid=t_classid,days=days)
+    return render_template('team.html', team_name=team_name,task_shers = task_shers,task_classification = task_classification,team_id=team_id,t_classid=t_classid,days=days)
   
 @task_bp.route('/task_practice_list', methods=['GET'])
 def task_practice_list():
