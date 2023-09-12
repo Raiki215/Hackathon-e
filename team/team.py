@@ -83,8 +83,15 @@ def add_member():
             # print(team_id)
             count = team_method.insert_team_member(id, team_id[0])
             if count == 1:
+                session.pop('id_list',None)
+                session.permanent = True
                 return render_template('team_task_list.html') 
     else:
-        return render_template('index.html')       
-             
-    
+        return render_template('index.html')
+
+       
+@team_bp.route('/delete_id')
+def delete_id():
+    session.pop('id_list', None)
+    session.permanent = True
+    return render_template('member_register.html')
