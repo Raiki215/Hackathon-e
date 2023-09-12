@@ -5,10 +5,34 @@
     margin-top: 20px;
 }
 
+.team_title{
+    font-size: 24px;
+    margin: 50px 0 0 0;
+    border-bottom: 3px solid;
+    width: 100%;
+}
+
+.team_create{
+    display: block;
+    text-decoration: none;
+    width: 60%;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+    border: 1px solid #000;
+    margin: 8px auto 5px auto;
+    padding: 10px 0 10px 0;
+}
+
+.team_create:hover{
+    color: #fff;
+    background-color: #666666;
+}
+
 .team_list_name{
     display: block;
     text-decoration: none;
-    width: 90%;
+    width: 95%;
     background-color: #fff;
     color: #000;
     border: 1px solid #000;
@@ -19,6 +43,10 @@
 .team_list_name:hover{
     color: #fff;
     background-color: #666666;
+}
+
+.team_list_task_title{
+    padding: 5px 0 5px 0;
 }
 
 .item{

@@ -3,6 +3,7 @@ import random
 import task.task_method as task_method
 
 from datetime import timedelta
+import datetime
 
 
 task_bp = Blueprint('task', __name__, url_prefix='/task')
@@ -65,9 +66,15 @@ def task_sher():
     task_shers = []
     for id in t_classid:
         task_shers.append(task_method.task_sher(id, team_id))
-
+    days = []
+    for tasks in  task_shers:
+        for task in tasks:
+            dt_now = datetime.datetime.now()
+            task_d_day = task[8]
+            difference = task_d_day - dt_now
+            days.append([task[0],difference.days])
         
-    return render_template('team.html', task_shers = task_shers,task_classification = task_classification,team_id=team_id,t_classid=t_classid)
+    return render_template('team.html', task_shers = task_shers,task_classification = task_classification,team_id=team_id,t_classid=t_classid,days=days)
   
 @task_bp.route('/task_practice_list', methods=['GET'])
 def task_practice_list():

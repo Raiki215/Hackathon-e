@@ -4,7 +4,6 @@
 {% endblock %}
 {% block content %}
     <div class="main">
-
         <h1 class="task_title">タスク一覧</h1>
         {% for t_class in task_classification %}
             <div onclick="obj=document.getElementById('open{{t_class[0]}}').style; obj.display=(obj.display=='none')?'block':'none';">
@@ -26,7 +25,13 @@
                     <ul class="task_item">
                         <div>
                         <p class="item taskname">{{task[1]}}</p>
-                        <p class="item taskdate">{{task[8].strftime('%Y/%m/%d')}}</p>
+                        <p class="item taskdate">{{task[8].strftime('%Y/%m/%d')}}<br>
+                            {% for d in days %}
+                                {% if d[0] == task[0] %}
+                                    {{d[1]}}日
+                                {% endif %}
+                            {% endfor %}
+                        </p>
                             {%if task[5] == 1 %}
                             <p class="item progress">計画中</p>
                             {%elif task[5] == 2%}
