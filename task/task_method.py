@@ -39,6 +39,31 @@ def select_latest_task(user_id):
         rows = 0
     return rows
 
+def task_user_category(id):
+    sql = 'SELECT id,task_category_name from task_classification WHERE user_id = %s'
+    
+    try:
+        connection = db.get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql, (id,))
+        rows=cursor.fetchall()
+    except pg.DatabaseError:
+        print('database error')
+    finally:
+        cursor.close()
+        connection.close()
+    return rows
+
+def select_task(id,user_id):
+    sql = 'SELECT * FROM task WHERE task_category_id = %s and user_id = %s and delete_key = %s ORDER BY completion_date ASC'
+    try :
+        connection = db.get_connection()
+        cursor =  connection.cursor()
+        cursor.execute(sql,(id,user_id,'f'))
+        rows = cursor.fetchall()
+    except pg.DatabaseError:
+        rows = 0
+    return rows
 
 def select_category_id():
     sql='SELECT id,task_category_name FROM task_classification'
