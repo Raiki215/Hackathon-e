@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "form_layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='/css/form.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="main">
     <h3>ログイン画面</h3>
     {% if error != null %}
     <p style="color:red">{{error}}</p>
@@ -20,5 +20,5 @@
     <button type="submit">ログイン</button>
     </form>
     <a href="{{url_for('user.register_form')}}">新規登録</a>
-</body>
-</html>
+</div>
+{% endblock %}

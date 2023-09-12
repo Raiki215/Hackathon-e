@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "form_layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='/css/form.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="main">
     {% if error != null %}
-    <p>{{error}}</p>
+        <p>{{error}}</p>
     {% endif %}
     <form action="{{url_for('admin.admin_login')}}" method="post">
         ID<input type="text" name="id" value="{{id}}">
         password<input type="password" name="password">
         <button type="submit">ログイン</button>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}
