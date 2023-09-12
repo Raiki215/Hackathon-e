@@ -12,7 +12,12 @@
     <button id="push_btn" type="button">検索</button>
     <table id="result">
     </table>
-    <button id="confirm_btn" type="">確認</button>
+    <form action="{{url_for('team.invite_member')}}" method="post">
+        <div id="inputDiv">
+
+        </div>
+        <button  type="submit">確認</button>
+    </form>
 
     
 

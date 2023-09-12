@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    {% if error != null %}
+    <p>{{error}}</p>
+    {% endif %}
     <form action="{{url_for('team.team_register_exe')}}" method="post">
         チーム名：<input type="text" name="team_name">
         <button type="submit">作成</button>

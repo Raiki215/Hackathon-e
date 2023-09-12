@@ -42,14 +42,13 @@ def insert_team_member(user_id, team_id):
     return count
 
 
-def mail_search(mail):
-    sql = "SELECT id,email FROM task_account WHERE email LIKE %s and email NOT LIKE 'admin@morijyobi.ac.jp'"
+def mail_search(mail,id):
+    sql = "SELECT id,email FROM task_account WHERE email = %s and email NOT LIKE 'admin@morijyobi.ac.jp'and id NOT IN (%s) "
     
     try:
         connection = db.get_connection()
-        cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        mail = '%' + mail + '%'
-        cursor.execute(sql,(mail,))
+        cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor) 
+        cursor.execute(sql,(mail,id))
         
         results = cursor.fetchall()
         
@@ -79,12 +78,9 @@ def team_id(user_id):
         
         result = cursor.fetchone()
         
-        for id in result:
-            team_id = id
-        
     except psycopg2.DatabaseError:
-        team_id = 0
+        result = 0
     finally:
         cursor.close()
         connection.close()
-    return team_id
+    return result

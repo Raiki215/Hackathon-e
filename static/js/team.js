@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const push = document.getElementById('push_btn');
     const searchResult = document.getElementById('result')
-    const confirm_btn = document.getElementById('confirm_btn')
+    const submit = document.getElementById('confirm_btn')
+    const inputDiv = document.getElementById("inputDiv")
 
     push.addEventListener('click', function() {
         const search = document.getElementById("mail").value;
@@ -55,6 +56,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         if(found === undefined) {
                             invite_list.push({id:user_id, email:user_mail})
                             invite_member_list(invite_list)
+                            const input = document.createElement("input")
+                            input.type = "hidden"
+                            input.value = user_id
+                            input.name = "id"
+                            input.id = user_mail
+                            inputDiv.appendChild(input)
                         }
                         
                     }
@@ -67,17 +74,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // submit.addEventListener('click', function() {
+    //     const xhr = new XMLHttpRequest()
+    //     xhr.open('POST','/team/invite_member',true)
+    //     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+    //     xhr.send(JSON.stringify({list: invite_list}))
+    // })
 
-    confirm_btn.addEventListener('click', function(){
-        console.log(confirm_btn)
-        invite_member(invite_list)
-    })
-    
-
+    function confrimclick()
+    {
+        console.log('送れるよ')
+    }
 
 
 
 })
+
 function invite_member_list(list){
     const invite_result = document.getElementById('invite_result')
     invite_result.innerHTML = ''
@@ -91,6 +103,8 @@ function invite_member_list(list){
         button.innerText = '取り消し';
         button.onclick = function(){
             let user_id = this.dataset.user_id //押されたボタンのカスタムデータ属性を取得
+            let user_mail = this.dataset.user_mail
+            document.getElementById(user_mail).remove()
             //listの中から押されたユーザーのIDのindex番号を取得する
             var index = list.findIndex(e => e.id === user_id);
             //指定されたindex番号をlistから削除する
@@ -102,6 +116,7 @@ function invite_member_list(list){
         invite_result.appendChild(tr).appendChild(td).appendChild(button);
     }
 
+    
 }
 
 //確認ボタンが押された時の動作
@@ -111,19 +126,20 @@ function invite_member_list(list){
 
 
 
-async function invite_member(list){
-    try{
-        await fetch('http://127.0.0.1:5000/team/invite_member', {
-                method: "POST",   // HTTP-Methodを指定する！
-                headers: {
-                    'Content-Type': 'application/json'  //どういう形式のデータを渡すか
-                },
-                body: JSON.stringify({"invite_list":list})
-    })
-    .then(res => {
-        return res.json()
-    })
-    } catch(error) {
-        console.log('エラー',error)
-    }
-}
+// async function invite_member(list){
+//     try{
+//         await fetch('http://127.0.0.1:5000/team/invite_member', {
+//                 method: "POST",   // HTTP-Methodを指定する！
+//                 headers: {
+//                     'Content-Type': 'application/json'  //どういう形式のデータを渡すか
+//                 },
+//                 body: JSON.stringify({"invite_list":list})
+//     })
+//     .then(res => {
+//         return res.json()
+//     })
+//     } catch(error) {
+//         console.log('エラー',error)
+//     }
+// }
+
