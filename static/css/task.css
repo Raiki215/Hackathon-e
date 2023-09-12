@@ -5,32 +5,41 @@
     margin-top: 20px;
 }
 
-.team_name{
-    font-size: 24px;
+.task_title_box{
+    /* position: relative; */
 }
 
-.team_title{
+.task_title{
+    float: left;
     font-size: 24px;
     margin: 20px 0 0 0;
     border-bottom: 3px solid;
     width: 100%;
 }
 
-.team_create{
-    display: block;
-    text-decoration: none;
-    width: 60%;
-    color: #000;
-    background-color: #fff;
-    text-align: center;
-    border: 1px solid #000;
-    margin: 8px auto 5px auto;
-    padding: 10px 0 10px 0;
+.add_task_class{
+    float: right;
+    color: blue;
+    margin: 0 10px 0 auto;
 }
 
-.team_create:hover{
-    color: #fff;
-    background-color: #666666;
+.list_task_title{
+    width: 95%;
+    float: left;
+    padding: 10px 0 10px 20px;
+    margin: 5px 0 5px 10px;
+    border: 1px solid #000;
+}
+
+.add_task{
+    float: right;
+    color: blue;
+    margin-right: 20px;
+}
+
+.openbox{
+    margin: 0 auto 30px auto;
+    width: 90%;
 }
 
 .team_list_name{
@@ -47,17 +56,6 @@
 .team_list_name:hover{
     color: #fff;
     background-color: #666666;
-}
-
-.team_list_task_title{
-    padding: 10px 0 10px 20px;
-    margin: 5px 0 5px 0;
-    border: 1px solid #000;
-}
-
-.openbox{
-    margin: 0 auto 30px auto;
-    width: 90%;
 }
 
 .item{

@@ -35,9 +35,29 @@ def post_add_task():
     count=task_method.insert_task(name,user_id,category,deadline,progres)
     
     if count==1:
-        return render_template('home.html')
+        return redirect(url_for('user.home'))
     else:
         return redirect(url_for('task.add_task'))
+    
+@task_bp.route('/task_list')
+def task_list():
+    user_id = session['user'][0]
+    task_classification = task_method.task_user_category(user_id)
+    # task = task_method.select_task(user_id)
+    t_classid = []
+    for id in task_classification:
+        t_classid.append(id[0])
+    tasks = []
+    for id in t_classid:
+        tasks.append(task_method.select_task(id, user_id))
+    days = []
+    for task in  tasks:
+        for t in task:
+            dt_now = datetime.datetime.now()
+            task_d_day = t[8]
+            difference = task_d_day - dt_now
+            days.append([t[0],difference.days])
+    return render_template('task_list.html', tasks = tasks,task_classification = task_classification,days=days)
     
 @task_bp.route('/task_sharing_list')
 def task_shar_list():
