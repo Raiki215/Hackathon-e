@@ -10,10 +10,25 @@
 }
 
 .team_title{
+    /* float: left; */
     font-size: 24px;
     margin: 20px 0 0 0;
     border-bottom: 3px solid;
     width: 100%;
+}
+
+.team_task_title{
+    float: left;
+    font-size: 24px;
+    margin: 20px 0 0 0;
+    border-bottom: 3px solid;
+    width: 100%;
+}
+
+.add_task_class{
+    float: right;
+    color: blue;
+    margin: 0 10px 0 auto;
 }
 
 .team_create{
@@ -33,6 +48,19 @@
     background-color: #666666;
 }
 
+.add_task_title{
+    float: left;
+    color: #000;
+    margin-right: 20px;
+}
+
+.add_task{
+    float: left;
+    color: blue;
+    margin-right: 20px;
+    margin-left: auto;
+}
+
 .team_list_name{
     display: block;
     text-decoration: none;
@@ -50,6 +78,9 @@
 }
 
 .team_list_task_title{
+    width: 100%;
+    float: right;
+    color: #000;
     padding: 10px 0 10px 20px;
     margin: 5px 0 5px 0;
     border: 1px solid #000;
