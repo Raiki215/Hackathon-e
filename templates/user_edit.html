@@ -8,11 +8,11 @@
 </head>
 <body>
     <h2>利用者情報編集画面</h2>
-    <form action="/user_edit" method="post">
+    <form action="{{url_for('user.edit')}}" method="post">
         <table>
             <tr><td><label>名前</label></td><td><input type="text" id="name" name="name" value="{{user[2]}}"></td></tr>
             <tr><td><label>メールアドレス</label></td><td><input type="email" id="mail" name="mail" value="{{user[1]}}"></td></tr>
-            <tr><td><label>パスワード</label></td><td><input type="password" id="pass" name="pass"></td></tr>
+            <tr><td><label>パスワード</label></td><td><input type="password" id="pass1" name="pass1"></td></tr>
             <tr><td><label>パスワード(確認)</label></td><td><input type="password" id="pass2" name="pass2"></td></tr>
             <tr><td><input type="submit" value="保存"></td></tr>
         </table>

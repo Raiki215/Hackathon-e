@@ -90,5 +90,22 @@ def get_user_list(id):
 
     return user_list
 
-def edit_user():
+def edit_user(mail,name,pass1,id):
+    print('Update')
+    sql = 'UPDATE task_account set email=%s,name=%s,salt=%s,pass=%s WHERE id = %s'
+    salt = db.get_salt()
+    hashed_password = db.get_hash(pass1, salt)
+
+    try:
+        connection = db.get_connection()
+        cursor = connection.cursor()
+
+        cursor.execute(sql, (mail,name,salt,hashed_password,id))
+        connection.commit()
+        
+    except psycopg2.DatabaseError:
+        print('error')
     
+    finally:
+        cursor.close()
+        connection.close()
