@@ -98,7 +98,7 @@ def select_team(id):
     return results
 
 def task_sher(id, team_id):
-    sql = 'SELECT * from task WHERE task_category_id = %s AND team_id = %s'
+    sql = 'SELECT * from task WHERE task_category_id = %s AND team_id = %s ORDER BY completion_date ASC'
     
     try:
         connection = db.get_connection()
