@@ -3,6 +3,7 @@ from datetime import timedelta
 from user.user import user_bp
 from admin.admin import admin_bp
 from task.task import task_bp
+from team.team import team_bp
 import string, random
 
 
@@ -13,6 +14,7 @@ app.secret_key = ''.join(random.choices(string.ascii_letters,k=256))
 app.register_blueprint(user_bp)
 app.register_blueprint(task_bp)
 app.register_blueprint(admin_bp)
+app.register_blueprint(team_bp)
 app.permanent_session_lifetime = timedelta(minutes=30)
 
 @app.route('/', methods=['GET'])

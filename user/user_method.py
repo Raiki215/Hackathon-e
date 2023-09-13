@@ -3,6 +3,22 @@ import sys
 sys.path.append('..')
 import db
 
+def get_mail(id):
+    sql = 'SELECT email FROM task_account WHERE id = %s'
+    try:
+        connection = db.get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql,(id,))
+        result = cursor.fetchone()
+        for result in result:
+            mail = result
+    except psycopg2.DatabaseError:
+        mail = None
+    finally:
+        cursor.close()
+        connection.close()
+    return mail
+
 def insert_user(email,name,password):
     sql = 'INSERT INTO task_account VALUES(default, %s, %s, %s, %s, false)'
     
