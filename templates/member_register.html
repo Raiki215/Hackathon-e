@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../static/js/team.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <table id="invite_result"></table>
+    <input type="text" name="mail" id="mail" placeholder="example@gmail.com">
+    <button id="push_btn" type="button">検索</button>
+    <table id="result">
+    </table>
+    <form action="{{url_for('team.invite_member')}}" method="post">
+        <div id="inputDiv">
+
+        </div>
+        <button  type="submit">確認</button>
+    </form>
+
+    
+
+</body>
+</html>

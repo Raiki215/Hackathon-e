@@ -6,7 +6,7 @@
 {% block content %}
 <div class="main">
     <h1 class="team_title">チーム一覧</h1>
-    <a href="" class="team_create">チームを作成する</a>
+    <a href="{{url_for('team.team_register')}}" class="team_create">チームを作成する</a>
     {% for t in team_list %}
         <a href="{{url_for('task.task_sher')}}?data={{t[0]}}" class="team_list_name">{{t[1]}}</a>
     {% endfor %}
