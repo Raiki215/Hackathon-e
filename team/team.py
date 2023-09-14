@@ -65,17 +65,24 @@ def add_member():
     if 'user' in session:
         user_id = session['id_list']
         team_admin_id = session['user'][0]
+        insert_count = 0
+        # print(len(user_id))
         # team_admin_id = 2
-        print(user_id)
-        for id in user_id:
-            print(int(id))
-            team_id = team_method.team_id(team_admin_id)
-            # print(team_id)
-            count = team_method.insert_team_member(id, team_id[0])
+        # print(user_id)
+        team_id = team_method.team_id(team_admin_id)
+        if team_id != None:
+            count = team_method.insert_team_member(team_admin_id, team_id[0])# 管理者をインサート
             if count == 1:
-                session.pop('id_list',None)
-                session.permanent = True
-                return render_template('team_list.html')
+                for id in user_id:
+                    # print(int(id))
+                    # print(team_id)
+                    count = team_method.insert_team_member(id, team_id[0]) #チームメンバーをインサート
+                    insert_count +=1
+                # print(insert_count)
+                if insert_count == len(user_id):
+                    session.pop('id_list',None)
+                    session.permanent = True
+                    return redirect(url_for('task.task_shar_list'))
     else:
         return render_template('index.html')
 

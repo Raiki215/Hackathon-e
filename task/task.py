@@ -66,6 +66,7 @@ def task_shar_list():
     team_list = []
     for team in team_list_id:
         team_list.append(task_method.select_team(team[1]))
+    
     return render_template('team_list.html',team_list=team_list)
 
 # [(1, 'チーム名', 1, False), (4, 'ぼかろP', 5, False)]

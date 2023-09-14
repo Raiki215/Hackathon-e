@@ -68,7 +68,7 @@ def team_id(user_id):
         result = cursor.fetchone()
 
     except psycopg2.DatabaseError:
-        result = 0
+        result = None
     finally:
         cursor.close()
         connection.close()
