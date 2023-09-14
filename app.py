@@ -2,7 +2,10 @@ from flask import Flask,render_template,request,redirect,url_for,session, Bluepr
 from datetime import timedelta
 from user.user import user_bp
 from admin.admin import admin_bp
+<<<<<<< HEAD
 from task.task import task_bp
+=======
+>>>>>>> 30c8a310f0f6dd81b5f0cb79d1f5f5388827426e
 from team.team import team_bp
 import string, random
 
@@ -15,6 +18,7 @@ app.register_blueprint(user_bp)
 app.register_blueprint(task_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(team_bp)
+<<<<<<< HEAD
 app.permanent_session_lifetime = timedelta(minutes=30)
 
 @app.route('/', methods=['GET'])
@@ -35,6 +39,9 @@ def mypage():
         return render_template('mypage.html')
     else :
         return redirect(url_for('index'))
+=======
+app.permanent_session_lifetime = timedelta(minutes=5)
+>>>>>>> 30c8a310f0f6dd81b5f0cb79d1f5f5388827426e
 
 @app.route('/notification',methods=['GET'])
 def notification():

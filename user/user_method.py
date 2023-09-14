@@ -87,3 +87,26 @@ def after_login(mail):
         connection.close()
     
     return user
+
+def get_mail(id):
+    sql = 'SELECT email FROM task_account WHERE id = %s'
+    
+    try:
+        connection = db.get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql,(id,))
+        
+        result = cursor.fetchone()
+        
+        for result in result:
+            mail = result
+        
+    except psycopg2.DatabaseError:
+        mail = None
+    
+    finally:
+        cursor.close()
+        connection.close()
+    
+    return mail

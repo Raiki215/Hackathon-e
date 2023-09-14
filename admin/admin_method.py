@@ -10,7 +10,7 @@ def admin_login(id, password):
         if id == 'admin':
             connection = db.get_connection()
             cursor = connection.cursor()
-            cursor.execute(sql) # ここでエラーが起きる
+            cursor.execute(sql)
             admin = cursor.fetchone()                
             salt = admin[1]
             hashed_passwword = db.get_hash(password, salt)
