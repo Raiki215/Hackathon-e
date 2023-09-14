@@ -133,10 +133,41 @@ td.today {
     margin-bottom: 5px;
 }
 
-.task_item .progress{
+.task_item .progress1{
     width: 10%;
+    text-align: center;
     color: #fff;
-    background-color: #7b7b7b;
+    background-color: #5fa55c;
+    border: 2px solid #000;
+    border-radius: 50px;
+    margin-left: 50px;
+}
+
+.task_item .progress2{
+    width: 10%;
+    text-align: center;
+    color: #fff;
+    background-color: #6d7bd8;
+    border: 2px solid #000;
+    border-radius: 50px;
+    margin-left: 50px;
+}
+
+.task_item .progress3{
+    width: 10%;
+    text-align: center;
+    color: #fff;
+    background-color: #ffa44e;
+    border: 2px solid #000;
+    border-radius: 50px;
+    margin-left: 50px;
+}
+
+.task_item .progress4{
+    width: 10%;
+    text-align: center;
+    color: #fff;
+    background-color: #fe5d5d;
     border: 2px solid #000;
     border-radius: 50px;
     margin-left: 50px;

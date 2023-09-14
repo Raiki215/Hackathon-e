@@ -1,11 +1,11 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h3>ログイン画面</h3>
+{% extends "form_layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='/css/form.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="main">
+    <h2>タスク管理システムログイン</h2>
     {% if error != null %}
     <p style="color:red">{{error}}</p>
     {% endif %}
@@ -14,11 +14,11 @@
     <p style="color:blue">{{msg}}</p>
     {%  endif %}
 
-    <form action="{{url_for('user.login')}}" method="post">
-        メールアドレス：<input type="text" name="mail"><br>
-        パスワード：<input type="password" name="password"><br>
-    <button type="submit">ログイン</button>
+    <a href="{{url_for('user.register_form')}}" class="loginurl">新規登録はこちら　＞</a>
+    <form action="{{url_for('user.login')}}" method="post" class="loginform">
+        <input type="text" name="mail" placeholder="メールアドレス">
+        <input type="password" name="password" placeholder="パスワード">
+    <button type="submit" class="loginbutton">ログイン</button>
     </form>
-    <a href="{{url_for('user.register_form')}}">新規登録</a>
-</body>
-</html>
+</div>
+{% endblock %}
