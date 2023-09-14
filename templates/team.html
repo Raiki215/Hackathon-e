@@ -1,0 +1,104 @@
+{% extends "main_layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='/css/team.css')}}">
+{% endblock %}
+{% block content %}
+    {% if user_id == team_name[2] %}
+    <div class="main">
+        <h1 class="team_name">{{team_name[1]}}</h1>
+        <div>
+            <h1 class="team_task_title">タスク一覧</h1>
+            <a href="" class="add_task_class">タスク分類追加</a>
+        </div>
+        {% for t_class in task_classification %}
+            <div onclick="obj=document.getElementById('open{{t_class[0]}}').style; obj.display=(obj.display=='none')?'block':'none';" class="team_list_task_title">
+                <a style="cursor:pointer;" class="add_task_title">▼ {{t_class[1]}}</a>
+                <a href="{{url_for('task.add_task')}}" class="add_task">タスク追加</a>
+            </div>
+
+            <div id="open{{t_class[0]}}" style="display:none;clear:both;" class="openbox">
+                <div>
+                    <p class="item taskname">タスク名</p>
+                    <p class="item taskdate taskline">期限</p>
+                    <p class="item progress taskline">進行度</p>
+                </div>
+
+            {% for tasks in  task_shers%}
+                {% for task in tasks%}
+                    {% if task[2] != t_class[0] %}
+                  
+                    {% else %}
+                    <div  class="task_item">
+                        <p class="item taskname">{{task[1]}}</p>
+                        <p class="item taskdate">{{task[8].strftime('%Y/%m/%d')}}<br>
+                            {% for d in days %}
+                                {% if d[0] == task[0] %}
+                                    {{d[1]}}日
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                            {%if task[5] == 1 %}
+                            <p class="item progress">計画中</p>
+                            {%elif task[5] == 2%}
+                            <p class="item progress">進行中</p>
+                            {%elif task[5] == 3%}
+                            <p class="item progress">完了</p>
+                            {%elif task[5] == 4%}
+                            <p class="item progress">修正中</p>
+                            {%endif%}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="main">
+        <h1 class="team_name">{{team_name[1]}}</h1>
+        <h1 class="team_title">タスク一覧</h1>
+        {% for t_class in task_classification %}
+            <div onclick="obj=document.getElementById('open{{t_class[0]}}').style; obj.display=(obj.display=='none')?'block':'none';" class="team_list_task_title   ">
+                <a style="cursor:pointer;">▼ {{t_class[1]}}</a>
+            </div>
+
+            <div id="open{{t_class[0]}}" style="display:none;clear:both;" class="openbox">
+                <div>
+                    <p class="item taskname">タスク名</p>
+                    <p class="item taskdate taskline">期限</p>
+                    <p class="item progress taskline">進行度</p>
+                </div>
+
+            {% for tasks in  task_shers%}
+                {% for task in tasks%}
+                    {% if task[2] != t_class[0] %}
+                  
+                    {% else %}
+                    <div  class="task_item">
+                        <p class="item taskname">{{task[1]}}</p>
+                        <p class="item taskdate">{{task[8].strftime('%Y/%m/%d')}}<br>
+                            {% for d in days %}
+                                {% if d[0] == task[0] %}
+                                    {{d[1]}}日
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                            {%if task[5] == 1 %}
+                            <p class="item progress">計画中</p>
+                            {%elif task[5] == 2%}
+                            <p class="item progress">進行中</p>
+                            {%elif task[5] == 3%}
+                            <p class="item progress">完了</p>
+                            {%elif task[5] == 4%}
+                            <p class="item progress">修正中</p>
+                            {%endif%}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
+    

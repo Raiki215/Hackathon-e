@@ -1,0 +1,85 @@
+.main{
+    width: 70%;
+    margin-right: 5%;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+.task_title{
+    float: left;
+    font-size: 24px;
+    margin: 20px 0 0 0;
+    border-bottom: 3px solid;
+    width: 100%;
+}
+
+.add_task_class{
+    float: right;
+    color: blue;
+    margin: 0 10px 0 auto;
+}
+
+.list_task_title{
+    width: 95%;
+    float: left;
+    padding: 10px 0 10px 20px;
+    margin: 5px 0 5px 10px;
+    border: 1px solid #000;
+}
+
+.add_task{
+    float: right;
+    color: blue;
+    margin-right: 20px;
+}
+
+.openbox{
+    margin: 0 auto 30px auto;
+    width: 90%;
+}
+
+.team_list_name{
+    display: block;
+    text-decoration: none;
+    width: 95%;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    padding: 10px 0 10px 30px;
+    margin: 10px 0 10px 0;
+}
+
+.team_list_name:hover{
+    color: #fff;
+    background-color: #666666;
+}
+
+.item{
+    display: inline-block;
+    vertical-align: middle;
+}
+.taskname{
+    padding-left: 20px;
+    width: 50%;
+}
+.taskdate,.progress{
+    width: 20%;
+    text-align: center;
+}
+.task_item .progress{
+    width: 10%;
+    color: #fff;
+    background-color: #7b7b7b;
+    border: 2px solid #000;
+    border-radius: 50px;
+    margin-left: 50px;
+}
+
+.task_item{
+    border: 1px solid #000;
+    margin-bottom: 5px;
+}
+
+.taskline{
+    border-left: 2px solid #000;
+}

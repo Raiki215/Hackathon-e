@@ -8,8 +8,11 @@
 <body>
     <h3>ユーザー登録画面</h3>
     {% if error != null%}
+    {% for error in error %}
     <p style="color:red">{{error}}</p>
+    {% endfor %}
     {% endif %}
+
 
     <form action="{{url_for('user.register_exe')}}" method="post">
         ユーザー名：<input type="text" name="username" value="{{user_name}}"><br>
