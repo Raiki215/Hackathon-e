@@ -49,7 +49,7 @@ def home():
             task_d_day = t[8]
             difference = task_d_day - dt_now
             task_progress = task_method.select_progress(t[5])
-            task_list.append([t[1],task_day,difference.days,task_progress[1]])
+            task_list.append([t[1],task_day,difference.days,task_progress[0],task_progress[1]])
         return render_template('home.html',task=task,task_list=task_list)
     else :
         
