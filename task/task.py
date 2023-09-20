@@ -100,8 +100,8 @@ def task_sher():
   
 @task_bp.route('/task_practice_list', methods=['GET'])
 def task_practice_list():
-    # if session['score'] != None:
-    #     session.pop('score', None)
+    # if session['task_game'] != None:
+    #     session.pop('task_game', None)
     task = task_method.select_task_game_list()
     return render_template('task_practice_list.html',task=task)
 
@@ -110,6 +110,7 @@ def task_practice_data():
     # if session['score'] != None:
     #     session.pop('score', None)
     num = int(request.form.get('data'))
+    session['task_game'] = num
     if task_method.check_task_game(num):
         return redirect(url_for('/task_practice_list'))
         
@@ -121,9 +122,10 @@ def task_practice_data():
 
 @task_bp.route('/task_practice_q1', methods=['GET','POST'])
 def task_practice_q1():
-    # if session['score'] != None:
-    #     session.pop('score', None)
-    num = request.form.get('data')
+    if session['task_game'] != None:
+        num = session['task_game']
+    else:
+        num = request.form.get('data')
     if task_method.check_task_game(num):
         return redirect(url_for('/task_practice_list'))
     
@@ -137,8 +139,13 @@ def task_practice_q1():
 
 @task_bp.route('/task_practice_a1', methods=['GET','POST'])
 def task_practice_a1():
-    task_q = request.form.get('q')
+    if session['task_game'] != None:
+        task_q = session['task_game']
+    else:
+        task_q = request.form.get('q')
     user_answer = request.form.getlist('event')
+    if len(user_answer) != 4:
+        return redirect(url_for('task.task_practice_q1'))
     original_data = task_method.select_task_game_problem(task_q)
     user_answer_list = []
     for id in user_answer:

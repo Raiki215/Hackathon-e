@@ -7,18 +7,19 @@
     <title>タスク管理システム</title>
 </head>
 <body>
+    <a href="{{url_for('task.task_practice_list')}}" class="cancel_button">◀ 中止する</a>
     <div class="q_main">
         <p class="task_list_title question">Q．どれくらいの期限で割り振る？</p>
-        <p>{{task_game[4]}}</p>
-        <form action="{{url_for('task.task_practice_a2')}}" class="dateform" method="post">
+        <p class="task_game_data">{{task_game[4]}}</p>
+        <form action="{{url_for('task.task_practice_a2')}}" class="" method="post">
             <div class="choicediv">
                 {% for c in choice %}
-                    <input type="text" name="num" value="{{c[0]}}" readonly class="noborder choicenumber">
-                    <input type="text" name="text" value="{{c[2]}}" readonly class="noborder choicetext">
+                    <input type="text" name="num" value="{{c[0]}}" readonly disabled class="noborder choicenumber">
+                    <input type="text" name="text" value="{{c[2]}}" readonly disabled class="noborder choicetext">
                     <input type="number" name="date" step="5" required><br>
                 {% endfor %}
                 <input type="hidden" name="q" value="{{q}}">
-                <input type="submit" class="q1_botton" value="答え合わせ">
+                <input type="submit" class="q2_botton" value="答え合わせ">
             </div>
         </form>
     </div>
