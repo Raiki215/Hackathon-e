@@ -4,7 +4,6 @@ import task.task_method as task_method
 from datetime import timedelta
 import datetime
 
-
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 @user_bp.route('/')
@@ -27,10 +26,10 @@ def login():
             session['user'] = [user[0], user[1], mail] # session にキー：'user', 0にid 1に名前
             return redirect(url_for('user.home'))
         else:
-            return render_template('index.html')
+            return redirect(url_for(''))
     
     else :
-        # error_list.append('ログインに失敗しました')
+
         error = 'ログインに失敗しました'
         mail= mail
         

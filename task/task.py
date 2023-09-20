@@ -223,3 +223,7 @@ def task_practice_evaluation():
             msg = "スコアの登録に失敗しました"
             task = task_method.select_task_game_list()
             return render_template('task_practice_list.html',task=task,msg=msg)
+
+@task_bp.route('/task_register', methods=['GET'])
+def task_register():
+    return render_template('task_register.html')
