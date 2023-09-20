@@ -207,8 +207,19 @@ label[for="botton1"],label[for="botton2"],label[for="botton3"]{
     margin: 25% auto 50px auto;
 }
 
+.task_game_data{
+    white-space: pre-wrap;
+    border: 2px dashed #000;
+    margin: 0 10% 30px 10%;
+    padding: 10px;
+}
+
 .noborder{
+    font-size: 15px;
+    padding: 5px 0 5px 0;
+    margin: 5px 0 5px 0;
     border: none;
+    background-color: #fff;
 }
 
 .choicenumber{
@@ -228,14 +239,25 @@ input[type=number]::-webkit-outer-spin-button {
   opacity: 1;
 }
 
+.q2_botton{
+    display: block;
+    text-align: center;
+    width: 100px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #666666;
+    border: 0.5px solid #000;
+    border-radius: 50px;
+    padding: 5px 20px 5px 20px;
+    margin: 20px auto 0px auto;
+}
+
 .choicediv{
     text-align: center;
 }
 
 .dateform input{
-    font-size: 15px;
-    padding: 5px 0 5px 0;
-    margin: 5px 0 5px 0;
+    
 }
 
 .q2_answer{
@@ -285,7 +307,7 @@ input[type=number]::-webkit-outer-spin-button {
     border: 0.5px solid #000;
     border-radius: 50px;
     padding: 5px 20px 5px 20px;
-    margin: 5% auto 50px auto;
+    margin: 20px auto 20px auto;
 }
 
 .start_botton{
