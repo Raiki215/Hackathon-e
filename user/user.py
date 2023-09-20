@@ -19,18 +19,22 @@ def login():
     
     mail = request.form.get('mail')
     password = request.form.get('password')
+    
     if user_method.login(mail, password):
         user=user_method.after_login(mail)
+        
         if user != None:
             session['user'] = [user[0], user[1], mail] # session にキー：'user', 0にid 1に名前
             return redirect(url_for('user.home'))
-        else :
-            error_list.append('ログインに失敗しました')
-            input_data = {
-            'mail': mail,
-            'password': password
-            }
-            return render_template('index.html',error=error, data=input_data)
+        else:
+            return render_template('index.html')
+    
+    else :
+        # error_list.append('ログインに失敗しました')
+        error = 'ログインに失敗しました'
+        mail= mail
+        
+        return render_template('index.html',error=error,mail=mail)
     
 @user_bp.route('/logout')
 def logout():

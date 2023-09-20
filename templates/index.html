@@ -16,7 +16,7 @@
 
     <a href="{{url_for('user.register_form')}}" class="loginurl">新規登録はこちら　＞</a>
     <form action="{{url_for('user.login')}}" method="post" class="loginform">
-        <input type="text" name="mail" placeholder="メールアドレス">
+        <input type="text" name="mail" placeholder="メールアドレス"value = {{mail}}>
         <input type="password" name="password" placeholder="パスワード">
     <button type="submit" class="loginbutton">ログイン</button>
     </form>
