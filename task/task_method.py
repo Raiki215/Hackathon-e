@@ -6,6 +6,7 @@ sys.path.append('..')
 import db
 import sys
 import pdb
+import datetime
 
 def insert_task(name,user_id,category_id,deadline,prog):
     sql='INSERT INTO task(id, task_name, task_category_id, user_id, progress, registration_date, completion_date, delete_key) VALUES(default, %s, %s, %s, %s, current_timestamp, %s, false)'
@@ -28,12 +29,14 @@ def insert_task(name,user_id,category_id,deadline,prog):
     return count
 
 def select_latest_task(user_id):
-    sql = 'SELECT * FROM task WHERE user_id = %s and delete_key = %s ORDER BY completion_date ASC LIMIT 5'
+    sql = 'SELECT * FROM task WHERE user_id = %s and completion_date > %s and delete_key = %s ORDER BY completion_date ASC LIMIT 5'
+    
+    date = datetime.datetime.now()
     
     try :
         connection = db.get_connection()
         cursor =  connection.cursor()
-        cursor.execute(sql,(user_id,'f'))
+        cursor.execute(sql,(user_id,date,'f'))
         rows = cursor.fetchall()
     except pg.DatabaseError:
         rows = 0
@@ -55,11 +58,14 @@ def task_user_category(id):
     return rows
 
 def select_task(id,user_id):
-    sql = 'SELECT * FROM task WHERE task_category_id = %s and user_id = %s and delete_key = %s ORDER BY completion_date ASC'
+    sql = 'SELECT * FROM task WHERE task_category_id = %s and user_id = %s and completion_date > %s and delete_key = %s ORDER BY completion_date ASC'
+    
+    date = datetime.datetime.now()
+    
     try :
         connection = db.get_connection()
         cursor =  connection.cursor()
-        cursor.execute(sql,(id,user_id,'f'))
+        cursor.execute(sql,(id,user_id,date,'f'))
         rows = cursor.fetchall()
     except pg.DatabaseError:
         rows = 0
@@ -123,12 +129,14 @@ def select_team(id):
     return results
 
 def task_sher(id, team_id):
-    sql = 'SELECT * from task WHERE task_category_id = %s AND team_id = %s ORDER BY completion_date ASC'
+    sql = 'SELECT * from task WHERE task_category_id = %s AND team_id = %s and completion_date > %s ORDER BY completion_date ASC'
+    
+    date = datetime.datetime.now()
     
     try:
         connection = db.get_connection()
         cursor = connection.cursor()
-        cursor.execute(sql, (id, team_id))
+        cursor.execute(sql, (id, team_id,date))
         results=cursor.fetchall()
     except pg.DatabaseError:
         print('database error')
