@@ -14,7 +14,7 @@
     <a href="{{url_for('notification')}}" class="material-icons miCSS notification_button">notifications</a>
     <aside>
         <ul class="main_menu">
-            <li><a href="">{{session['user'][1]}}</a></li>
+            <li><a href="{{url_for('user.user_edit')}}">{{session['user'][1]}}</a></li>
             <li><a href="{{url_for('user.logout')}}">ログアウト</a></li>
             <li><a href="{{url_for('user.home')}}">ホーム</a></li>
             <li><a href="{{url_for('task.task_list')}}">タスク一覧</a></li>

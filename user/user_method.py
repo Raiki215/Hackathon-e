@@ -104,9 +104,40 @@ def get_mail(id):
         
     except psycopg2.DatabaseError:
         mail = None
+
+def get_user_list(id):
+    sql = 'SELECT * FROM task_account WHERE id = %s'
+    try:
+        connection = db.get_connection()
+        cursor =  connection.cursor()
+        cursor.execute(sql, (id,))
+        user_list = cursor.fetchone()
+    
+    except psycopg2.DatabaseError:
+        print('error')
     
     finally:
         cursor.close()
         connection.close()
+
+    return user_list
+
+def edit_user(mail,name,pass1,id):
+    print('Update')
+    sql = 'UPDATE task_account set email=%s,name=%s,salt=%s,pass=%s WHERE id = %s'
+    salt = db.get_salt()
+    hashed_password = db.get_hash(pass1, salt)
+
+    try:
+        connection = db.get_connection()
+        cursor = connection.cursor()
+
+        cursor.execute(sql, (mail,name,salt,hashed_password,id))
+        connection.commit()
+        
+    except psycopg2.DatabaseError:
+        print('error')
     
-    return mail
+    finally:
+        cursor.close()
+        connection.close()
