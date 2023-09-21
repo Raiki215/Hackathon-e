@@ -29,7 +29,7 @@ def login():
             'mail': mail,
             'password': password
             }
-            return render_template('index.html',error=error, data=input_data)
+            return render_template('index.html',error=error_list, data=input_data)
     
 @user_bp.route('/logout')
 def logout():
@@ -112,12 +112,16 @@ def edit():
     pass2 = request.form.get('pass2')
     
     user_list = [id,mail,name,pass1,pass2] #配列に格納する
-    user_method.edit_user(mail,name,pass1,id)
     
-
     if not name or not mail or not pass1 or not pass2: #全部に入力されているか
-        return render_template('edit_user.html',user=user_list)
-    if pass1 != pass2: #パスワードが一致しているか
-        return render_template('edit_user.html',user=user_list)
+        return render_template('user_edit.html',user=user_list)
     
-    return redirect(url_for('user.logout'))
+    user_method.edit_user(mail,name,pass1,id)
+    if user_id[1] != name:
+        user_id[1] = name
+        session['user'] = user_id
+        
+    if pass1 != pass2: #パスワードが一致しているか
+        return render_template('user_edit.html',user=user_list)
+    
+    return redirect(url_for('user.home'))
